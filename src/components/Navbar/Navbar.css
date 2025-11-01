@@ -1,0 +1,81 @@
+
+
+nav {
+  margin: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 100%;
+  background-color: #181719;
+  padding: 12px 0px 0px 40px;
+  display: flex;
+  align-items: center;
+  
+  justify-content: space-around;
+  box-sizing: border-box;
+  z-index: 100;
+
+}
+.search{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+
+  
+  
+}
+.auth{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1%;
+}
+.icon{
+  position: absolute;
+  right: 210px;
+  top:12px;
+   cursor: pointer;
+}
+.proficon{
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+
+}
+input{
+  background-color: white;
+  border-radius: 25px;
+  border: 2px solid white;
+  height: 12px;
+  color: black;
+  padding-left :40px; 
+  width: 250px;
+  height: 40px;
+}
+input::placeholder{
+  padding-left: 20px;
+}
+button{
+  margin: 0px 20px 0px;
+
+}
+.sign{
+  background: #181719;
+  border: none;
+  outline: none;
+  color: #88D1D5 ;
+  font-size: 110%;
+   cursor: pointer;
+}
+.login{
+  border-radius: 8px;
+  padding:10px 25px;
+  background: #181719;
+  color: white;
+  border: 1px solid white;
+   cursor: pointer;
+}
+.login:hover{
+  border: 2px solid rgb(68, 68, 169);
+}

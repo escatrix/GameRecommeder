@@ -1,0 +1,26 @@
+import React from "react";
+import Navbar from "../../components/Navbar/Navbar";
+import Hero from "../../components/Hero/Hero";
+import TrendingGamePage from "../TrendingGamePage/TrendingGamePage";
+import StreamerToolSection from "../../components/StreamerToolSection/StreamerToolSection";
+import Footer from "../../components/Footer/Footer";
+import LoginPage from "../LoginPage/LoginPage";
+
+
+function Home(){
+    return(
+        <div className="home">
+    
+        <Navbar className='navbar'/>
+        
+        <Hero className='hero'/>
+        <StreamerToolSection className='streamer'/>
+        <TrendingGamePage/>
+        <Footer/>
+    
+        
+     
+        </div>
+    )
+}
+export default Home
