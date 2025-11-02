@@ -53,7 +53,7 @@ function TrendingGamePage() {
 
       <div className="game-list">
         {games.map((game) => (
-          <div key={game.id} className="game-card">
+          <div key={game.id} className="trengame-card">
             <img src={game.img} alt={game.title} />
             <h3>{game.title}</h3>
             <p className="release-date">{game.date}</p>

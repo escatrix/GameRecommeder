@@ -3,9 +3,8 @@
   color: #fff;
   padding: 80px 10%;
   width: 100vw;
- 
+  box-sizing: border-box; /* Good to add this to prevent overflow */
 }
-
 
 .trending-header {
   display: flex;
@@ -13,17 +12,20 @@
   align-items: center;
   margin-bottom: 50px;
   flex-wrap: wrap;
+  gap: 20px; /* Added a gap for wrapping */
 }
 
 .trending-header h1 {
   font-size: 2.4rem;
   font-weight: 700;
+  margin: 0; /* Remove default margin */
 }
 
 .trending-header p {
   color: #b3b3b3;
   margin-top: 8px;
   font-size: 1rem;
+  margin-bottom: 0; /* Remove default margin */
 }
 
 .trending-header button {
@@ -31,41 +33,48 @@
   color: white;
   border: none;
   padding: 14px 24px;
-
+  border-radius: 8px; /* Added for a modern look */
   font-size: 1rem;
   cursor: pointer;
-  transition:0.3s;
+  transition: 0.3s;
+  white-space: nowrap; /* Prevents button text from wrapping */
 }
 
 .trending-header button:hover {
   background-color: #917cff;
 }
 
-
+/* --- THIS IS THE CORRECTED CLASS NAME --- */
 .game-list {
   display: flex;
-  justify-content: space-between;
   flex-wrap: wrap;
   gap: 30px;
+  /* 'justify-content: space-between' can look strange 
+    when the last row isn't full. A gap is often cleaner.
+    If you prefer the space-between look, add it back.
+  */
+  justify-content: center; /* Or 'flex-start' or 'space-between' */
 }
 
-.game-card {
+.trengame-card {
   width: 250px;
 }
 
-.game-card img {
+.trengame-card img {
   width: 100%;
+  height: 330px; /* Added a fixed height */
+  object-fit: cover; /* Ensures image covers the area, not stretch */
   border-radius: 10px;
   margin-bottom: 12px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.game-card img:hover {
+.trengame-card img:hover {
   transform: scale(1.05);
   box-shadow: 0 10px 30px rgba(255, 255, 255, 0.15);
 }
 
-.game-card h3 {
+.trengame-card h3 {
   font-size: 1.1rem;
   font-weight: 700;
   margin-bottom: 6px;
