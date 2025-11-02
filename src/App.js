@@ -15,7 +15,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path='/RecomByName' element={<RecomByName/>}/>
-        <Route path='./RecomByFeatures' element={<RecomByFeatures/>}/>
+        <Route path='/RecomByFeatures' element={<RecomByFeatures/>}/>
         <Route path="/mlmodel" element={<MlModel />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUp />} />

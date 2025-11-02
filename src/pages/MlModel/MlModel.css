@@ -5,7 +5,7 @@
     align-items: center;
     flex-direction: column;
     flex-wrap: wrap;
-    background: #0E0E10;
+    background: linear-gradient(#3b1c77, #6D61D4);
     height: 100vh;
     color: white;
 }
