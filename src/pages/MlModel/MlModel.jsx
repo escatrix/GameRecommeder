@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 function MlModel(){
     return(
         <div className="mlmodel">
-            <div className="heading">
+            <div className="head-recom">
                 <h1>Game Recommender</h1>
             </div>
             <div className="twomodel">
