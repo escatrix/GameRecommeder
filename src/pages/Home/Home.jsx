@@ -4,6 +4,7 @@ import Hero from "../../components/Hero/Hero";
 import TrendingGamePage from "../TrendingGamePage/TrendingGamePage";
 import StreamerToolSection from "../../components/StreamerToolSection/StreamerToolSection";
 import Footer from "../../components/Footer/Footer";
+import MlModel from "../MlModel/MlModel";
 import LoginPage from "../LoginPage/LoginPage";
 
 
@@ -12,8 +13,9 @@ function Home(){
         <div className="home">
     
         <Navbar className='navbar'/>
-        
+       
         <Hero className='hero'/>
+         <MlModel/>
         <StreamerToolSection className='streamer'/>
         <TrendingGamePage/>
         <Footer/>

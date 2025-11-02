@@ -1,0 +1,103 @@
+.recom-container {
+  text-align: center;
+  background: linear-gradient(180deg, #0f0424, #3b1c77);
+  color: #ffffff;
+  padding: 50px 20px;
+  min-height: 100vh;
+  
+  width: 100vw;
+
+}
+
+.recom-title {
+  font-size: 2rem;
+  margin-bottom: 25px;
+  color: #534AA1;
+  
+}
+
+.recom-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction:column;
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.recom-input {
+  padding: 12px 15px;
+  border: 2px solid #534AA1;
+  background: transparent;
+  color: white;
+  border-radius: 10px;
+  outline: none;
+  width: 70%;
+  font-size: 1rem;
+  transition: 0.3s ease;
+}
+
+.recom-input:focus {
+  box-shadow: 0 0 12px #534AA1;
+}
+
+.recom-btn {
+  background-color: #534AA1;
+  border: none;
+  color: #12002f;
+  padding: 12px 25px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  width: 200px;
+  transition: 0.3s ease;
+}
+
+.recom-btn:hover {
+  background-color: #382baf;
+}
+
+.error {
+  color: #ff4f4f;
+  margin-top: 10px;
+}
+
+.no-recom {
+  color: #bbb;
+  margin-top: 15px;
+}
+
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 25px;
+  margin-top: 20px;
+}
+
+.game-card {
+  background-color: #2d0b52;
+  border: 2px solid #534AA1;
+  border-radius: 16px;
+  width: 220px;
+  padding: 15px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.game-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 20px #534AA1;
+}
+
+.game-image {
+  width: 100%;
+  height: 140px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.game-card h4 {
+  margin: 12px 0 6px;
+  color: #534AA1;
+  font-weight: 600;
+}

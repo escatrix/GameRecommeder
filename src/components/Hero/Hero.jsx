@@ -1,8 +1,12 @@
 import React from "react";
+import { useState } from "react";
 import './Hero.css'
 import laptopImg from '../../assets/laptop.png'
+import { Navigate, useNavigate } from "react-router-dom";
 
 function Hero(){
+  const navigate = useNavigate();
+  const [isLoggedIn ,setisLoggedIn] = useState(false)
     return(
            <section className="hero">
       
@@ -32,10 +36,17 @@ function Hero(){
             connect with more of what you love.
           </p>
 
-          <div className="buttons">
-            <button className="email-btn">Sign up with Email</button>
-            
-          </div>
+          {!isLoggedIn && (
+            <div className="buttons">
+              <button
+                className="email-btn"
+                onClick={() => navigate("/signup")}
+              >
+                Sign up with Email
+              </button>
+            </div>
+          )}
+
 
           <p className="footer1">
             It’s free – used by 90,521 gamers, creators & developers
