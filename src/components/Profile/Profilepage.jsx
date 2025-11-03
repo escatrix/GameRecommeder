@@ -3,59 +3,26 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./ProfilePage.css";
 
-// API Endpoints
-const LOGOUT_API_URL = "https://task-4-pt0q.onrender.com/api/auth/logout";
+// API Endpoint for User Data
 const USER_DATA_API_URL = "https://task-4-pt0q.onrender.com/api/user/data"; 
 
 export default function ProfilePage() {
   const navigate = useNavigate();
   
-  // State for user data, initialized with locally stored data (if available)
+  // Initialize user state from local storage
   const [user, setUser] = useState(() => {
     const localUser = localStorage.getItem('user');
     return localUser ? JSON.parse(localUser) : null;
   });
 
-  const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [isFetchingData, setIsFetchingData] = useState(true);
 
-  // --- 1. Logout Handler (Defined early so useEffect can use it) ---
-  const handleLogout = async (isForced = false) => {
-    if (!isForced) {
-        setLoading(true);
-    }
-    setError("");
-    
-    try {
-      if (!isForced) {
-        // Call the backend API to clear the HTTP-only cookie
-        await axios.post(LOGOUT_API_URL, {}, { withCredentials: true });
-      }
-
-      // Frontend cleanup: Clear localStorage and state
-      localStorage.removeItem('user');
-      setUser(null);
-
-      // Redirect to the login page
-      navigate("/login", { replace: true });
-
-    } catch (err) {
-      console.error("Logout error:", err);
-      // Even if API call fails, we assume cookie is cleared or invalid, proceed with redirect
-      localStorage.removeItem('user');
-      navigate("/login", { replace: true });
-    } finally {
-      setLoading(false);
-    }
-  };
-
-
-  // --- 2. Fetch User Data on Load (Refactored) ---
+  // --- Fetch User Data on Load ---
   useEffect(() => {
     const tokenExists = localStorage.getItem('user');
     
-    // 1. Check if the user is even expected to be logged in
+    // 1. Initial check: If no local data exists, redirect to login (basic protection)
     if (!tokenExists) {
         setIsFetchingData(false);
         navigate("/login", { replace: true });
@@ -64,23 +31,29 @@ export default function ProfilePage() {
 
     const fetchUserData = async () => {
       setIsFetchingData(true);
+      setError("");
+
       try {
         const response = await axios.get(USER_DATA_API_URL, {
           withCredentials: true,
         });
 
         if (response.data && response.data.success && response.data.data) {
-          // Success: Set fresh data
+          // Success: Set fresh data and update local storage
           setUser(response.data.data);
           localStorage.setItem('user', JSON.stringify(response.data.data));
         } else {
-          // Failure: Backend sent success: false (JWT recognized, but user status bad)
-          handleLogout(true); 
+          // Failure: Backend sent success: false 
+          setError(response.data.message || "Failed to retrieve user data.");
+          localStorage.removeItem('user');
+          setUser(null); 
         }
       } catch (err) {
         // Critical Failure: Axios catches 401/403 (JWT invalid/expired/missing)
         console.error("User data fetch failed, session invalid:", err);
-        handleLogout(true); // Force logout and redirection
+        setError("Session expired. Please log in again to refresh your data.");
+        localStorage.removeItem('user');
+        setUser(null); // Stop displaying protected data
       } finally {
         setIsFetchingData(false);
       }
@@ -89,18 +62,35 @@ export default function ProfilePage() {
     // If local data exists, proceed to fetch fresh data.
     fetchUserData();
 
-  }, [navigate]); // Dependency array is now stable
+  }, [navigate]);
 
   // --- Render Logic ---
 
-  if (isFetchingData || !user) {
-    // Show a loading state until data is fetched or redirection occurs
+  if (isFetchingData) {
     return (
       <div className="profile-container">
         <div className="profile-card loading">
           <p>Loading user profile...</p>
         </div>
       </div>
+    );
+  }
+
+  // If fetching is done but no user data is present (due to API failure/cleanup)
+  if (!user && error) {
+    return (
+        <div className="profile-container">
+            <div className="profile-card error-card">
+                <h2>Access Denied</h2>
+                <p className="error-msg">{error}</p>
+                <button 
+                  className="login-redirect-btn"
+                  onClick={() => navigate("/login")}
+                >
+                  Go to Login
+                </button>
+            </div>
+        </div>
     );
   }
 
@@ -134,14 +124,8 @@ export default function ProfilePage() {
         </div>
 
         {error && <p className="error-msg">{error}</p>}
-
-        <button 
-          className="logout-btn" 
-          onClick={() => handleLogout()} 
-          disabled={loading}
-        >
-          {loading ? 'Logging Out...' : 'Log Out'}
-        </button>
+        
+        {/* Removed the Logout Button */}
       </div>
     </div>
   );
