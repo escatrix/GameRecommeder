@@ -120,6 +120,7 @@ export default function SignupPage() {
   try {
 
     const response = await axios.post(VERIFY_OTP_URL, {
+      // email: email, // Use the email from the initial form
       otp: otpData.otp,
     });
 
