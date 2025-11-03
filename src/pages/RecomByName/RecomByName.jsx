@@ -23,7 +23,7 @@ export default function RecomByName() {
     setRecommendations([]);
     setSearchedGame(null); 
 
-    axios.get(`/recommend/name/?game_name=${name}&n=5`)
+    axios.get(`https://game-recommendation-system-vpw3.onrender.com/recommend/name/?game_name=${name}&n=6`)
       .then(response => {
         
         const apiRecs = response.data.recommendations || [];

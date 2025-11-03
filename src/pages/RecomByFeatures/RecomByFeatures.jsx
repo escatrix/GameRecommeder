@@ -72,7 +72,7 @@ function RecomByFeatures() {
         setError(null);
         setGameResults([]);
 
-        const API_URL = '/recommend/features/';
+        const API_URL = 'https://game-recommendation-system-vpw3.onrender.com/recommend/features/';
         
 
         const requestBody = {

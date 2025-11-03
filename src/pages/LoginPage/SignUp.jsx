@@ -81,13 +81,15 @@ export default function SignupPage() {
 
     axios
       .post(VERIFY_OTP_URL, {
-        email: formData.email, // Use the email from the initial form
+        email: email, // Use the email from the initial form
         otp: otpData.otp,
       })
       .then((response) => {
         if (response.status === 200 || response.status === 201) {
           setSuccess("Account verified successfully! Redirecting to login...");
-          setFormData({ name: "", email: "", password: "", confirmPassword: "" });
+          setName("")
+          setEmail("")
+          setPassword("")
           setOtpData({ otp: "" });
           setTimeout(() => {
             navigate("/login");
@@ -160,7 +162,7 @@ export default function SignupPage() {
             
             <form onSubmit={handleVerifyOtp}>
               <p>
-                A verification code has been sent to **{formData.email}**.
+                A verification code has been sent to **{email}**.
                 Please enter it below.
               </p>
               <input
