@@ -14,10 +14,7 @@ const Navbar = () => {
         </h1>
       </div>
 
-      <div className="search">
-        <FaSearch className="search-icon" />
-        <input type="text" placeholder="Search Game" />
-      </div>
+      
 
       <div className="menu-icon" onClick={() => setMenuOpen(!menuOpen)}>
         {menuOpen ? <FaTimes /> : <FaBars />}

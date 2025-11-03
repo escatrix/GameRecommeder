@@ -150,89 +150,90 @@ export default function SignupPage() {
 
   return (
     <div className="form">
-      <div className="auth-container">
-        <div className="auth-card">
-          <h2>Sign up</h2>
-          <p>
-            Already have an account? <Link to="/login">Login</Link>
-          </p>
+    <div className="auth-container">
+      <div className="auth-card">
+        <h2>Sign up</h2>
+        <p>
+        Already have an account? <Link to="/login">Login</Link>
+        </p>
 
-          {!showOtpSection ? (
+        {!showOtpSection ? (
           
-            <form onSubmit={handleSignup}>
-              <input
-                type="text"
-                placeholder="Full Name"
-                name="name"
-                value={name}
-                onChange={(e)=>{setName(e.target.value)}}
-                required
-              />
-              <input
-                type="email"
-                placeholder="Email"
-                name="email"
-                value={email}
-                onChange={(e)=>{setEmail(e.target.value)}}
-                required
-              />
-              <input
-                type="password"
-                placeholder="Set Password"
-                name="password"
-                value={password}
-                onChange={(e)=>{setPassword(e.target.value)}}
-                required
-              />
-              {/* <input
-                type="password"
-                placeholder="Confirm Password"
+        <form onSubmit={handleSignup}>
+          <input
+            type="text"
+            placeholder="Full Name"
+            name="name"
+            value={name}
+            onChange={(e)=>{setName(e.target.value)}}
+            required
+          />
+          <input
+          type="email"
+          placeholder="Email"
+          name="email"
+          value={email}
+          onChange={(e)=>{setEmail(e.target.value)}}
+         required
+          />
+          <input
+            type="password"
+            placeholder="Set Password"
+            name="password"
+            value={password}
+            onChange={(e)=>{setPassword(e.target.value)}}
+            required
+            
+          />
+          
+            {/* <input
+              type="password"
+              placeholder="Confirm Password"
                 name="confirmPassword"
                 value={formData.confirmPassword}
                 onChange={handleChange}
                 required
               /> */}
 
-              {error && <p className="error-msg">{error}</p>}
-              {success && <p className="success-msg">{success}</p>}
-
-              <button type="submit" className="auth-btn">
-                Register (Send OTP)
-              </button>
-            </form>
+          {error && <p className="error-msg">{error}</p>}
+          {success && <p className="success-msg">{success}</p>}
+          <button type="submit" className="auth-btn">
+           Register (Send OTP)
+          </button>
+          </form>
           ) : (
             
-            <form onSubmit={handleVerifyOtp}>
-              <p>
-                A verification code has been sent to **{email}**.
-                Please enter it below.
-              </p>
-              <input
-                type="text"
-                placeholder="Enter OTP (6 digits)"
-                name="otp"
-                value={otpData.otp}
-                onChange={handleOtpChange}
-                maxLength="6"
-                required
+          <form onSubmit={handleVerifyOtp}>
+          <p>
+            A verification code has been sent to **{email}**.
+            Please enter it below.
+            </p>
+          <input
+            type="text"
+          placeholder="Enter OTP (6 digits)"
+           name="otp"
+            value={otpData.otp}
+            onChange={handleOtpChange}
+             maxLength="6"
+            required
               />
 
-              {error && <p className="error-msg">{error}</p>}
-              {success && <p className="success-msg">{success}</p>}
+        {error && <p className="error-msg">{error}</p>}
+         {success && <p className="success-msg">{success}</p>}
 
-              <button type="submit" className="auth-btn">
-                Verify Account
-              </button>
+        <button type="submit" className="auth-btn">
+            Verify Account
+          </button>
 
-              <button
-                type="button"
-                className="auth-btn secondary"
-                onClick={handleSignup} 
-                
-              >
-                Resend OTP
-              </button>
-            </form>
+          <button
+          type="button"
+          className="auth-btn secondary"
+          onClick={handleSignup} 
+       
+          >
+            Resend OTP
+          </button>
+         </form>
           )}
         </div>
       </div>

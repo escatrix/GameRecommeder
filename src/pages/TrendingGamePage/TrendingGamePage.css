@@ -3,7 +3,7 @@
   color: #fff;
   padding: 80px 10%;
   width: 100vw;
-  box-sizing: border-box; /* Good to add this to prevent overflow */
+  box-sizing: border-box; 
 }
 
 .trending-header {
@@ -12,7 +12,7 @@
   align-items: center;
   margin-bottom: 50px;
   flex-wrap: wrap;
-  gap: 20px; /* Added a gap for wrapping */
+  gap: 20px; 
 }
 
 .trending-header h1 {

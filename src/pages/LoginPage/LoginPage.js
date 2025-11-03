@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./Auth.css";
 
-const LOGIN_API_URL = "https://backend-auth-ben6.onrender.com/api/auth/login";
+const LOGIN_API_URL = "https://task-4-pt0q.onrender.com/api/auth/login";
 
 export default function LoginPage() {
   const navigate = useNavigate();
