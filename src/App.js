@@ -8,6 +8,7 @@ import MlModel from './pages/MlModel/MlModel';
 import SignUp from "./pages/LoginPage/SignUp";
 import RecomByName from "./pages/RecomByName/RecomByName";
 import RecomByFeatures from "./pages/RecomByFeatures/RecomByFeatures";
+import ProfilePage from "./components/Profile/Profilepage";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/mlmodel" element={<MlModel />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUp />} />
+        <Route path="/profile"  element={<ProfilePage/>}/>
       </Routes>
   
     </BrowserRouter>

@@ -1,138 +1,10 @@
-// import React, { useState } from "react";
-// import { Link, useNavigate } from "react-router-dom";
-// import axios from "axios";
-// import "./Auth.css";
 
-// const LOGIN_API_URL = "https://task-4-pt0q.onrender.com/api/auth/login";
-
-// export default function LoginPage() {
-//   const navigate = useNavigate();
-
-//   const [email, setEmail] = useState("");
-//   const [password, setPassword] = useState("");
-//   const [error, setError] = useState("");
-//   const [loading, setLoading] = useState(false);
-
-//   // const handleLogin = (e) => {
-//   //   e.preventDefault();
-//   //   setError("");
-//   //   setLoading(true);
-
-//   //   axios.post(LOGIN_API_URL, {
-//   //       email,    
-//   //       password, 
-//   //     })
-//   //     .then((response) => {
-//   //       // 
-
-//   //       console.log("API Success Response:", response.data);
-//   //       if (response.data && response.data.token) {
-//   //         localStorage.setItem('token', response.data.token);
-//   //         if (response.data.user) {
-//   //           localStorage.setItem('user', JSON.stringify(response.data.user));
-//   //         }
-//   //         navigate("/", { replace: true });
-
-//   //       } else {
-//   //         setError(response.data.message || "Invalid credentials provided.");
-//   //       }
-
-//   //       setLoading(false);
-//   //     })
-//   //     .catch((err) => {
-//   //       console.error("Login API error:", err);
-//   //       setError(
-//   //         err.response?.data?.message || "Login failed. Please try again."
-//   //       );
-//   //       setLoading(false);
-//   //     });
-//   // };
-
-//   const handleLogin = async (e) => {
-//     e.preventDefault();
-//     setError("");
-//     setLoading(true);
-
-//     try {
-
-//       const response = await axios.post(
-//         LOGIN_API_URL,
-//         {
-//           email,
-//           password,
-//         },
-//         { withCredentials: true }
-//       );
-
-
-//       if (response.data && response.data.success === true) {
-//         if (response.data.data) {
-//           localStorage.setItem('user', JSON.stringify(response.data.data));
-//         }
-//         navigate("/", { replace: true });
-//       } else {
-//         setError(response.data.message || "Login failed. Please check your credentials.");
-//       }
-//     } catch (err) {
-//       console.error("Login API error:", err);
-//       setError(
-//         err.response?.data?.message || "Login failed. Please check your credentials and try again."
-//       );
-//     } finally {
-//       setLoading(false);
-//     }
-//   };
-//   return (
-//     <div className="form">
-//       <div className="auth-container">
-//         <div className="auth-card">
-//           <h2>Login</h2>
-//           <p>
-//             Don’t have an account? <Link to="/signup">Sign Up</Link>
-//           </p>
-
-//           <form onSubmit={handleLogin}>
-//             <input
-//               type="email"
-//               placeholder="Email"
-//               value={email}
-
-//               onChange={(e) => setEmail(e.target.value)}
-//               required
-//             />
-
-//             <input
-//               type="password"
-//               placeholder="Password"
-//               value={password}
-//               onChange={(e) => setPassword(e.target.value)}
-//               required
-//             />
-
-//             {error && <p className="error-msg">{error}</p>}
-
-//             <div className="auth-options">
-//               <label>
-//                 <input type="checkbox" /> Remember me
-//               </label>
-//               <Link to="#">Forgot Password?</Link>
-//             </div>
-
-//             <button type="submit" className="auth-btn" disabled={loading}>
-//               {loading ? 'Logging In...' : 'Log In'}
-//             </button>
-//           </form>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./Auth.css";
 
-// API Endpoints
+
 const LOGIN_API_URL = "https://task-4-pt0q.onrender.com/api/auth/login";
 const RESET_OTP_URL = "https://task-4-pt0q.onrender.com/api/auth/reset-otp";
 const RESET_PASSWORD_URL = "https://task-4-pt0q.onrender.com/api/auth/resetPassword";
@@ -140,20 +12,17 @@ const RESET_PASSWORD_URL = "https://task-4-pt0q.onrender.com/api/auth/resetPassw
 export default function LoginPage() {
   const navigate = useNavigate();
 
-  // Primary States
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [otp, setOtp] = useState("");
   const [newPassword, setNewPassword] = useState("");
-  
-  // UI States
+
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
-  // Controls which screen is shown: 'login', 'request_otp', 'reset_password'
+
   const [mode, setMode] = useState('login'); 
 
-  // --- HANDLER FUNCTIONS ---
 
   const resetMessages = () => {
     setError("");
@@ -161,7 +30,6 @@ export default function LoginPage() {
     setLoading(false);
   };
 
-  // --- 1. LOGIN HANDLER ---
   const handleLogin = async (e) => {
     e.preventDefault();
     resetMessages();
@@ -197,7 +65,7 @@ export default function LoginPage() {
   };
 
 
-  // --- 2. SEND RESET OTP HANDLER (Step 1 of Reset Flow) ---
+
   const handleSendResetOtp = async (e) => {
     e.preventDefault();
     resetMessages();
@@ -213,7 +81,7 @@ export default function LoginPage() {
 
       if (response.data && response.data.success === true) {
         setSuccess(response.data.message || "OTP sent! Check your email and proceed to reset.");
-        // Move to the next screen to enter OTP and new password
+      
         setMode('reset_password'); 
         setOtp('');
         setNewPassword('');
@@ -229,7 +97,6 @@ export default function LoginPage() {
   };
 
 
-  // --- 3. RESET PASSWORD HANDLER (Step 2 of Reset Flow) ---
   const handleResetPassword = async (e) => {
     e.preventDefault();
     resetMessages();
@@ -250,7 +117,6 @@ export default function LoginPage() {
       if (response.data && response.data.success === true) {
         setSuccess(response.data.message || "Password successfully reset! Redirecting to login.");
         
-        // Clear all fields and return to the login screen after a delay
         setTimeout(() => {
           setEmail('');
           setPassword('');
@@ -271,11 +137,9 @@ export default function LoginPage() {
   };
 
 
-  // --- RENDER LOGIC ---
 
   const renderForm = () => {
     if (mode === 'request_otp') {
-      // Step 1: Request OTP Screen
       return (
         <form onSubmit={handleSendResetOtp}>
           <h3>Forgot Password?</h3>
@@ -305,7 +169,6 @@ export default function LoginPage() {
         </form>
       );
     } else if (mode === 'reset_password') {
-      // Step 2: Reset Password Screen
       return (
         <form onSubmit={handleResetPassword}>
           <h3>Reset Password</h3>
@@ -338,7 +201,7 @@ export default function LoginPage() {
           <button 
             type="button" 
             className="auth-btn secondary"
-            onClick={handleSendResetOtp} // Resend logic
+            onClick={handleSendResetOtp}
             disabled={loading}
           >
             Resend Code
@@ -346,7 +209,6 @@ export default function LoginPage() {
         </form>
       );
     } else {
-      // Default: Login Screen
       return (
         <form onSubmit={handleLogin}>
           <input
@@ -371,7 +233,6 @@ export default function LoginPage() {
             <label>
               <input type="checkbox" /> Remember me
             </label>
-            {/* Link to trigger OTP Request mode */}
             <a 
               href="#"
               onClick={(e) => { 

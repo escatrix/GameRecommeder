@@ -6,7 +6,7 @@ import StreamerToolSection from "../../components/StreamerToolSection/StreamerTo
 import Footer from "../../components/Footer/Footer";
 import MlModel from "../MlModel/MlModel";
 import LoginPage from "../LoginPage/LoginPage";
-
+import ProfilePage from "../../components/Profile/Profilepage";
 
 function Home(){
     return(
