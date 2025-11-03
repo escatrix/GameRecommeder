@@ -51,8 +51,17 @@ export default function ProfilePage() {
   };
 
 
-  // --- 2. Fetch User Data on Load ---
+  // --- 2. Fetch User Data on Load (Refactored) ---
   useEffect(() => {
+    const tokenExists = localStorage.getItem('user');
+    
+    // 1. Check if the user is even expected to be logged in
+    if (!tokenExists) {
+        setIsFetchingData(false);
+        navigate("/login", { replace: true });
+        return;
+    }
+
     const fetchUserData = async () => {
       setIsFetchingData(true);
       try {
@@ -61,31 +70,26 @@ export default function ProfilePage() {
         });
 
         if (response.data && response.data.success && response.data.data) {
-          // Update state and local storage with fresh data (including verification status)
+          // Success: Set fresh data
           setUser(response.data.data);
           localStorage.setItem('user', JSON.stringify(response.data.data));
         } else {
-          // If the backend returns success: false (e.g., JWT expired), force logout
+          // Failure: Backend sent success: false (JWT recognized, but user status bad)
           handleLogout(true); 
         }
       } catch (err) {
-        // Axios catches 401/403 (Unauthorized) if the JWT cookie is invalid/expired
-        console.error("User data fetch failed:", err);
+        // Critical Failure: Axios catches 401/403 (JWT invalid/expired/missing)
+        console.error("User data fetch failed, session invalid:", err);
         handleLogout(true); // Force logout and redirection
       } finally {
         setIsFetchingData(false);
       }
     };
     
-    // Initial check and fetch attempt
-    if (user) {
-        fetchUserData();
-    } else {
-        // No user data in localStorage, redirect immediately
-        navigate("/login", { replace: true });
-    }
+    // If local data exists, proceed to fetch fresh data.
+    fetchUserData();
 
-  }, [navigate, user]); // Added user to dependency array to prevent initial infinite loop issue
+  }, [navigate]); // Dependency array is now stable
 
   // --- Render Logic ---
 
