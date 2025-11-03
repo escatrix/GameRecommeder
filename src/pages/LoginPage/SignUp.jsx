@@ -116,17 +116,14 @@ export default function SignupPage() {
     return;
   }
 
-  // Start the try block to "watch" for errors
+
   try {
-    // 1. "await" the axios.post call
-    // The code will pause here until the request is finished
+
     const response = await axios.post(VERIFY_OTP_URL, {
-      email: email, // Use the email from the initial form
       otp: otpData.otp,
     });
 
-    // 2. If the "await" succeeds, the code continues here.
-    // We can check the status just like before.
+
     if (response.status === 200 || response.status === 201) {
       setSuccess("Account verified successfully! Redirecting to login...");
       setOtpData({ otp: "" });
@@ -135,17 +132,14 @@ export default function SignupPage() {
         navigate("/login");
       }, 1500);
     } else {
-      // Handle unexpected success statuses (e.g., 204 No Content)
       setError("OTP verification returned an unexpected status.");
     }
 
   } catch (err) {
-    // 3. If the "await" (the axios.post) fails,
-    // the code will jump straight to this "catch" block.
+
     
     console.error("OTP Verification error:", err);
     
-    // The error logic is the same as your original .catch()
     setError(
       err.response?.data?.message || "OTP verification failed. Please check the OTP and try again."
     );
