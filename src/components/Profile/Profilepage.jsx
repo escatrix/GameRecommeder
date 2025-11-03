@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -6,7 +5,6 @@ import "./ProfilePage.css";
 
 // API Endpoints
 const LOGOUT_API_URL = "https://task-4-pt0q.onrender.com/api/auth/logout";
-// Assuming a protected endpoint exists to get fresh user data
 const USER_DATA_API_URL = "https://task-4-pt0q.onrender.com/api/user/data"; 
 
 export default function ProfilePage() {
@@ -22,44 +20,7 @@ export default function ProfilePage() {
   const [error, setError] = useState("");
   const [isFetchingData, setIsFetchingData] = useState(true);
 
-  // --- 1. Fetch User Data ---
-  useEffect(() => {
-    const fetchUserData = async () => {
-      setIsFetchingData(true);
-      try {
-        // Fetch fresh user data from the protected endpoint using the JWT cookie
-        const response = await axios.get(USER_DATA_API_URL, {
-          withCredentials: true,
-        });
-
-        if (response.data && response.data.success && response.data.data) {
-          // Assuming response.data.data contains { name, email, isAccountVerified }
-          setUser(response.data.data);
-          localStorage.setItem('user', JSON.stringify(response.data.data));
-        } else {
-          // If the backend returns success: false (e.g., JWT expired), navigate to login
-          handleLogout(true); // Forced logout without calling API again
-        }
-      } catch (err) {
-        // Axios catches 401 Unauthorized, meaning JWT is invalid/expired
-        console.error("User data fetch failed:", err);
-        handleLogout(true); // Force logout and redirection
-      } finally {
-        setIsFetchingData(false);
-      }
-    };
-    
-    // Only attempt to fetch if local storage data is present (implying user believes they are logged in)
-    if (user) {
-        fetchUserData();
-    } else {
-        // If no local data, user is not logged in, redirect them
-        navigate("/login", { replace: true });
-    }
-
-  }, [navigate]); // Dependency array includes navigate
-
-  // --- 2. Logout Handler ---
+  // --- 1. Logout Handler (Defined early so useEffect can use it) ---
   const handleLogout = async (isForced = false) => {
     if (!isForced) {
         setLoading(true);
@@ -81,11 +42,50 @@ export default function ProfilePage() {
 
     } catch (err) {
       console.error("Logout error:", err);
-      setError(err.response?.data?.message || "Logout failed on the server. Please try again.");
+      // Even if API call fails, we assume cookie is cleared or invalid, proceed with redirect
+      localStorage.removeItem('user');
+      navigate("/login", { replace: true });
     } finally {
       setLoading(false);
     }
   };
+
+
+  // --- 2. Fetch User Data on Load ---
+  useEffect(() => {
+    const fetchUserData = async () => {
+      setIsFetchingData(true);
+      try {
+        const response = await axios.get(USER_DATA_API_URL, {
+          withCredentials: true,
+        });
+
+        if (response.data && response.data.success && response.data.data) {
+          // Update state and local storage with fresh data (including verification status)
+          setUser(response.data.data);
+          localStorage.setItem('user', JSON.stringify(response.data.data));
+        } else {
+          // If the backend returns success: false (e.g., JWT expired), force logout
+          handleLogout(true); 
+        }
+      } catch (err) {
+        // Axios catches 401/403 (Unauthorized) if the JWT cookie is invalid/expired
+        console.error("User data fetch failed:", err);
+        handleLogout(true); // Force logout and redirection
+      } finally {
+        setIsFetchingData(false);
+      }
+    };
+    
+    // Initial check and fetch attempt
+    if (user) {
+        fetchUserData();
+    } else {
+        // No user data in localStorage, redirect immediately
+        navigate("/login", { replace: true });
+    }
+
+  }, [navigate, user]); // Added user to dependency array to prevent initial infinite loop issue
 
   // --- Render Logic ---
 
