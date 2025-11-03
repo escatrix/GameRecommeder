@@ -48,7 +48,7 @@ function TrendingGamePage() {
             Switch, PS5 and Xbox S|X.
           </p>
         </div>
-        <button>See all trending games</button>
+        
       </div> 
 
       <div className="game-list">

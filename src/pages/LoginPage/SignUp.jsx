@@ -122,7 +122,7 @@ export default function SignupPage() {
     const response = await axios.post(VERIFY_OTP_URL, {
       // email: email, // Use the email from the initial form
       otp: otpData.otp,
-    });
+    },{withCredentials:true});
 
 
     if (response.status === 200 || response.status === 201) {
