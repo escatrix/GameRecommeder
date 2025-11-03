@@ -50,7 +50,7 @@ export default function SignupPage() {
     setSuccess("");
 
     try{
-      const response = await axios.post("https://backend-auth-ben6.onrender.com/api/auth/register/send-verify-otp",{
+      const response = await axios.post("https://task-4-pt0q.onrender.com/api/auth/register/send-verify-otp",{
         name:name,
         email:email,
         password:password
@@ -87,9 +87,7 @@ export default function SignupPage() {
       .then((response) => {
         if (response.status === 200 || response.status === 201) {
           setSuccess("Account verified successfully! Redirecting to login...");
-          setName("")
-          setEmail("")
-          setPassword("")
+          
           setOtpData({ otp: "" });
           setTimeout(() => {
             navigate("/login");
