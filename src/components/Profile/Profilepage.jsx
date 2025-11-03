@@ -18,7 +18,6 @@ export default function ProfilePage() {
   const [error, setError] = useState("");
   const [isFetchingData, setIsFetchingData] = useState(true);
 
-  // --- Fetch User Data on Load ---
   useEffect(() => {
     const tokenExists = localStorage.getItem('user');
     
@@ -64,7 +63,6 @@ export default function ProfilePage() {
 
   }, [navigate]);
 
-  // --- Render Logic ---
 
   if (isFetchingData) {
     return (
@@ -125,7 +123,6 @@ export default function ProfilePage() {
 
         {error && <p className="error-msg">{error}</p>}
         
-        {/* Removed the Logout Button */}
       </div>
     </div>
   );

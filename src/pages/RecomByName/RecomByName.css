@@ -1,13 +1,22 @@
+.badawala {
+  min-height: 100vh;
+  background-color: #f8f9fa;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 50px;
+}
 
 .recom-container {
   width: 90%;
   max-width: 900px;
-  margin: 20px auto;
+  margin: 0 auto 50px auto;
   padding: 20px;
   background: #ffffff;
   border: 1px solid #ddd;
   border-radius: 12px;
-  font-family: Arial, sans-serif;
   text-align: center;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
@@ -15,47 +24,50 @@
 .recom-title {
   font-size: 2rem;
   margin-bottom: 25px;
-  color: #333; 
+  color: #333;
 }
 
 .recom-form {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: row; 
-  gap: 10px; 
+  flex-direction: row;
+  gap: 10px;
   margin-bottom: 40px;
 }
 
 .recom-input {
   padding: 12px 15px;
   border: 2px solid #ccc;
-  background: #ffffff; 
-  color: #333; 
+  background: #ffffff;
+  color: #333;
   border-radius: 10px;
   outline: none;
   width: 300px;
+  max-width: 100%;
+  flex-grow: 1;
   font-size: 1rem;
 }
 
 .recom-input:focus {
-  border-color: #007bff; 
-  box-shadow: 0 0 8px rgba(0, 123, 255, 0.5); 
+  border-color: #007bff;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
 }
 
 .recom-btn {
   background-color: #007bff;
   border: none;
-  color: white; 
+  color: white;
   padding: 14px 25px;
   border-radius: 10px;
   cursor: pointer;
   font-weight: 600;
   transition: 0.2s ease;
+  flex-shrink: 0;
 }
 
 .recom-btn:hover {
-  background-color: #0056b3; 
+  background-color: #0056b3;
 }
 
 .recom-btn:disabled {
@@ -64,7 +76,7 @@
 }
 
 .error {
-  color: #ff4f4f; 
+  color: #ff4f4f;
   margin-top: 10px;
   font-weight: bold;
 }
@@ -78,9 +90,17 @@
 .searched-game-section {
   width: 100%;
   margin: 30px 0;
-  border-bottom: 2px solid #eee; 
+  border-bottom: 2px solid #eee;
   padding-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
+
+.searched-game-section .game-card {
+  width: 300px;
+}
+
 
 .cards-container {
   display: flex;
@@ -103,26 +123,27 @@
 }
 
 .game-card {
-  background-color: #ffffff; 
-  border: 1px solid #ddd; 
-  border-radius: 8px; 
-  width: 280px; 
-  overflow: hidden; 
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  width: 280px;
+  overflow: hidden;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  text-align: left; 
+  text-align: left;
+  flex-shrink: 1;
 }
 
 .game-card:hover {
-  transform: translateY(-5px); 
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
+  transform: translateY(-5px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .game-card-img {
   width: 100%;
-  height: 160px; 
-  border-radius: 0; 
-  object-fit: cover; 
+  height: 160px;
+  border-radius: 0;
+  object-fit: cover;
 }
 
 .game-card-content {
@@ -145,7 +166,32 @@
 
 .game-card-similarity {
   font-weight: bold !important;
-  color: #28a745 !important; 
+  color: #28a745 !important;
   font-size: 1rem !important;
   margin-bottom: 10px !important;
+}
+
+@media (max-width: 600px) {
+  .recom-form {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .recom-input {
+    width: 100%;
+  }
+
+  .recom-btn {
+    width: 100%;
+    padding: 12px 25px;
+  }
+
+  .game-card {
+    width: 100%;
+    max-width: 350px;
+  }
+
+  .cards-container {
+    justify-content: center;
+  }
 }
