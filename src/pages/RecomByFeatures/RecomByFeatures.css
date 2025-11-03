@@ -15,7 +15,7 @@
     margin: 20px auto;
     padding: 20px;
     background: #0D0A1F;
-    border: 1px solid #0F172A;
+    border: 1px solid #ddd;
     border-radius: 12px;
 
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
@@ -110,7 +110,7 @@ hr {
 
 
 .game-box {
-    background: #16213D;
+    background: #ffffff;
     border: 1px solid #ddd;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
