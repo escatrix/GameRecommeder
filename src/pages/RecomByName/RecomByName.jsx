@@ -5,19 +5,16 @@ import "./RecomByName.css";
 import gameData from '../../game.json';
 
 
-const gameLookup = new Map(gameData.map(game => [game.name, game]));
 
 export default function RecomByName() {
   const [name, setName] = useState("");
   const [recommendations, setRecommendations] = useState([]);
-  
-
   const [searchedGame, setSearchedGame] = useState(null); 
-  
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const handleSubmit = async (e) => {
+
+  const handleSubmit = (e) => {
     e.preventDefault();
     if (!name.trim()) return;
 
@@ -26,43 +23,40 @@ export default function RecomByName() {
     setRecommendations([]);
     setSearchedGame(null); 
 
-    try {
-      // API call using the proxy (relative path)
-      const response = await axios.get(`/recommend/name/?game_name=${name}&n=5`);
+    axios.get(`/recommend/name/?game_name=${name}&n=5`)
+      .then(response => {
+        
+        const apiRecs = response.data.recommendations || [];
+        const searchedGameName = response.data.searched_game;
 
-   
-      const apiRecs = response.data.recommendations || [];
-      const searchedGameName = response.data.searched_game;
-
-      // 1. Find and set the full data for the searched game
-      if (searchedGameName) {
-        const fullSearchedGame = gameLookup.get(searchedGameName);
-        setSearchedGame(fullSearchedGame || { name: searchedGameName });
-      }
-
-      // 2. Find and set the full data for the recommendations
-      const fullRecommendations = apiRecs.map(rec => {
-        const gameDetails = gameLookup.get(rec.game);
-
-        if (gameDetails) {
-          // Merge API data (rank, similarity) with JSON data
-          return { ...gameDetails, ...rec }; 
+        if (searchedGameName) {
+          const fullSearchedGame = gameData.find(game => game.name === searchedGameName);
+          setSearchedGame(fullSearchedGame || { name: searchedGameName });
         }
-        // Fallback to just API data if not found in JSON
-        return rec; 
+
+        const fullRecommendations = apiRecs.map(rec => {
+          const gameDetails = gameData.find(game => game.name === rec.game);
+
+          if (gameDetails) {
+            return { ...gameDetails, ...rec }; 
+          }
+          return rec; 
+        });
+
+        setRecommendations(fullRecommendations);
+        setLoading(false); 
+      })
+      .catch(err => {
+        console.error("API Error:", err);
+        setError("Could not fetch recommendations. Please try again.");
+        setLoading(false); 
       });
+      
 
-      setRecommendations(fullRecommendations);
-
-    } catch (err) {
-      console.error("API Error:", err);
-      setError("Could not fetch recommendations. Please try again.");
-    } finally {
-      setLoading(false);
-    }
   };
 
   return (
+    <div className="badawala">
     <div className="recom-container">
       <h2 className="recom-title">Recommend Games by Name</h2>
 
@@ -135,6 +129,7 @@ export default function RecomByName() {
           <p className="no-recom">Enter a game name to get recommendations.</p>
         )}
       </div>
+    </div>
     </div>
   );
 }

@@ -11,53 +11,41 @@ export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false); 
 
-  const handleLogin = async (e) => {
+  const handleLogin = (e) => {
     e.preventDefault();
     setError("");
     setLoading(true);
 
-    try {
-      const response = await axios.post(LOGIN_API_URL, {
-        email,
-        password,
-      });
-
-      // --- KEY CHANGE: Validate the RESPONSE DATA, not just the status ---
-      // A successful login should return data including a token.
-      // We check if 'response.data' and 'response.data.token' exist.
-      if (response.data && response.data.token) {
-        // --- Successful Login Logic ---
-
-        // 1. Store the authentication token in localStorage.
-        // This is crucial for keeping the user logged in across pages.
-        localStorage.setItem('token', response.data.token);
+    axios.post(LOGIN_API_URL, {
+        email,    
+        password, 
+      })
+      .then((response) => {
+        // 
         
-        // 2. Optionally, save user data as well.
-        if (response.data.user) {
+        console.log("API Success Response:", response.data);
+        if (response.data && response.data.token) {
+          localStorage.setItem('token', response.data.token);
+          if (response.data.user) {
             localStorage.setItem('user', JSON.stringify(response.data.user));
+          }
+          navigate("/", { replace: true });
+
+        } else {
+          setError(response.data.message || "Invalid credentials provided.");
         }
 
-        console.log("Login successful! Token received:", response.data.token);
-
-        // 3. Navigate to the home page because validation was successful.
-        navigate("/", { replace: true });
-
-      } else {
-        // --- Handle cases where the API responds 200 OK, but login failed ---
-        // This happens if the credentials were wrong.
-        setError(response.data.message || "Invalid credentials provided.");
-      }
-    } catch (err) {
-      // This 'catch' block handles network errors or server-side crashes (e.g., 404, 500).
-      console.error("Login API error:", err);
-      setError(
-        err.response?.data?.message || "Login failed. Please try again."
-      );
-    } finally {
-      setLoading(false); // Stop loading in all cases
-    }
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("Login API error:", err);
+        setError(
+          err.response?.data?.message || "Login failed. Please try again."
+        );
+        setLoading(false);
+      });
   };
 
   return (
@@ -74,6 +62,7 @@ export default function LoginPage() {
               type="email"
               placeholder="Email"
               value={email}
+           
               onChange={(e) => setEmail(e.target.value)}
               required
             />

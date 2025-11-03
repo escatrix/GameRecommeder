@@ -1,250 +1,161 @@
+.badawala{
+    
 
-.mlmodel {
+    width: 100vw;
+
+    background: linear-gradient(180deg, #0f0424, #3b1c77);
+font-family: "Bitcount Grid Single", system-ui;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    background-color: #f0f2f5;
-    font-family: Arial, sans-serif;
-    padding: 20px;
 }
-
-.question-box,
-.results-box {
-    background: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    padding: 24px 32px;
+.app-container {
     width: 100%;
-    max-width: 600px;
-    text-align: center;
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 20px;
+    background: linear-gradient( rgb(133, 97, 210) , white);
+    border: 1px solid #ddd;
+    border-radius: 12px;
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
-.results-box {
-    text-align: left;
+
+.question-area {
+    width: 100%;
+    margin-bottom: 20px;
 }
 
-
-.top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.question-area h2 {
+    font-size: 1.2rem;
     border-bottom: 1px solid #eee;
-    padding-bottom: 16px;
-    margin-bottom: 24px;
-}
-
-h1 {
-    font-size: 24px;
-    color: #333;
-    margin: 0;
+    padding-bottom: 5px;
 }
 
 
-.progress-dots {
-    display: flex;
-}
-
-.progress-dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background-color: #ddd;
-    margin-left: 6px;
-    transition: background-color 0.3s ease;
-}
-
-.progress-dot.active {
-    background-color: #007bff;
-}
-
-.question {
-    font-size: 20px;
-    font-weight: 600;
-    color: #555;
-    margin-bottom: 24px;
-}
-
-
-.bottom {
+.button-area {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    gap: 12px;
-    margin-bottom: 32px;
+    gap: 10px; 
+    margin-top: 10px;
 }
 
-.btn-op {
-    background-color: #f8f9fa;
-    border: 1px solid #ddd;
+
+.option-button {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
     border-radius: 20px;
-    padding: 10px 20px;
-    font-size: 16px;
-    color: #333;
+    padding: 8px 16px;
     cursor: pointer;
-    transition: all 0.2s ease;
+    font-size: 0.9rem;
+    transition: all 0.2s; 
 }
-
-.btn-op:hover {
+.option-button:hover {
     border-color: #007bff;
     color: #007bff;
 }
 
 
-.btn-op.selected {
+.option-button.selected {
     background-color: #007bff;
-    color: #ffffff;
+    color: white;
     border-color: #007bff;
-    font-weight: 600;
+    font-weight: bold;
 }
 
 
-.nav-buttons {
-    display: flex;
-    justify-content: space-between;
-    padding-top: 16px;
-    border-top: 1px solid #eee;
-}
-
-.nav-btn {
-    background-color: #5cb85c;
+.submit-button {
+    background-color: #28a745;
     color: white;
     border: none;
     border-radius: 8px;
     padding: 12px 24px;
-    font-size: 16px;
-    font-weight: 600;
+    font-size: 1.1rem;
+    font-weight: bold;
     cursor: pointer;
-    transition: background-color 0.2s ease;
+    margin-top: 20px;
 }
 
-.nav-btn:hover {
-    background-color: #4cae4c;
+.submit-button:hover {
+    background-color: #218838;
 }
 
-.nav-btn:first-child {
-    background-color: #6c757d;
-}
-.nav-btn:first-child:hover {
-    background-color: #5a6268;
-}
-.nav-btn:disabled {
+
+.submit-button:disabled {
     background-color: #ccc;
     cursor: not-allowed;
 }
 
-.loader {
-    border: 4px solid #f3f3f3;
-    border-top: 4px solid #007bff;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    animation: spin 1s linear infinite;
-    margin: 20px auto;
+.error-message {
+    color: red;
+    font-weight: bold;
 }
 
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-.recommendation-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 16px;
-    height: 100vh;
-    margin: 24px 0;
-}
-
-.game-card {
-    background: #fdfdfd;
-    border: 1px solid #eee;
-    width: 60%;
-    height: 100%;
-    border-radius: 8px;
-    padding: 16px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
-}
-
-.game-card h3 {
-    font-size: 18px;
-    color: #0056b3;
-    margin-top: 0;
-    margin-bottom: 12px;
-}
-
-.game-card p {
-    font-size: 14px;
-    margin: 4px 0;
-}
-
-.results-box {
+hr {
+    border: 0;
+    border-top: 1px solid #eee;
     width: 100%;
-    max-width: 1200px; 
-    text-align: center;
+    margin: 20px 0;
 }
 
-.recommendation-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 24px;
-    margin: 24px 0;
-    text-align: left;
-}
 
-.game-card {
-    background: #ffffff;
-    border: 1px solid #eee;
-    border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-    overflow: hidden;
+.results-area {
+    width: 100%;
+    margin-top: 20px;
     display: flex;
-    flex-direction: column;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
-.game-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+
+.game-box {
+    background: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    
+
+    width: 280px;
+    margin: 10px; 
+
+   
 }
 
-.game-card-img {
-    width: 100%;
-    height: 180px; 
+.game-box:hover {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+
+.game-image {
+    width: 100%; 
+    height: 160px;
+ 
     object-fit: cover; 
-    border-bottom: 1px solid #eee;
+   
+    border-radius: 8px;
+    
+}
+
+.game-info {
+    padding: 15px;
+}
+
+.game-info h3 {
+    margin: 0 0 10px;
+    font-size: 1.15rem;
+}
+
+.game-info p {
+    margin: 4px 0;
+    font-size: 0.9rem;
+    color: #333;
 }
 
 
-.game-card-content {
-    padding: 16px;
-    flex-grow: 1; 
+.game-info p:first-of-type {
+    font-weight: bold;
+    color: #28a745; 
+    font-size: 1rem;
+    margin-bottom: 10px;
 }
-
-.game-card-content h3 {
-    font-size: 20px;
-    color: #0056b3;
-    margin-top: 0;
-    margin-bottom: 12px;
-}
-
-.game-card-content p {
-    font-size: 14px;
-    margin: 6px 0;
-    color: #555;
-    line-height: 1.4;
-}
-
-.game-card-similarity {
-    font-size: 16px !important;
-    font-weight: 600;
-    color: #28a745 !important; 
-    margin-bottom: 12px !important;
-}
-
-.game-card-platforms {
-    font-size: 12px !important;
-    color: #777 !important;
-    word-break: break-word; 
-}
-
