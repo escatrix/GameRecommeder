@@ -56,7 +56,7 @@ export default function SignupPage() {
         name: formData.name,
         email: formData.email,
         password: formData.password,
-      })
+      },{withCredentials:true})
       .then((response) => {
 
         if (response.status === 200 || response.status === 201) {
