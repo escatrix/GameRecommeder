@@ -60,6 +60,7 @@ export default function SignupPage() {
       setName("")
       setEmail("")
       setPassword("")
+      setShowOtpSection(true)
     }catch(error){
       console.log("Error in sending otp",error.message)
     }
