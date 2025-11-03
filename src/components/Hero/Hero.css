@@ -1,19 +1,17 @@
 .hero {
   position: relative;
-  width: 100vw;
+  width: 100%;
   height: 110vh;
   background: linear-gradient(180deg, #0f0424, #3b1c77);
   color: white;
- 
-  
-}
 
+  overflow-x: hidden;
+}
 
 .background-dots .dot {
   position: absolute;
-  background: linear-gradient(#EAE8FD , #534AA1 ,#39326E);
+  background: linear-gradient(#EAE8FD, #534AA1, #39326E);
   border-radius: 50%;
-
 }
 
 .dot1 {
@@ -43,31 +41,35 @@
   bottom: 15%;
   right: 40%;
 }
-.dot5{
-    width: 120px;
-    height: 120px;
-    right: 80%;
-    top: 63%;
 
+.dot5 {
+  width: 120px;
+  height: 120px;
+  right: 80%;
+  top: 63%;
 }
-.dot6{
-    width: 220px;
-    right:58%;
-    top: 32%;
-    height: 220px;
+
+.dot6 {
+  width: 220px;
+  right: 58%;
+  top: 32%;
+  height: 220px;
 }
-.dot7{
-    width: 110px;
-    height: 110px;
-    z-index: 3;
-    top: 25%;
-    right: 85%;
+
+.dot7 {
+  width: 110px;
+  height: 110px;
+  z-index: 3;
+  top: 25%;
+  right: 85%;
 }
-.dot8{
-    width: 60px;
-    height: 60px;
-    right: 1300px;
-    top: 300px;
+
+.dot8 {
+  width: 60px;
+  height: 60px;
+
+  left: 10%;
+  top: 300px;
 }
 
 .hero-content {
@@ -80,13 +82,11 @@
   z-index: 2;
 }
 
-
 .laptop-img {
   width: 500px;
   transform: rotate(-10deg);
   filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.5));
 }
-
 
 .hero-right {
   max-width: 450px;
@@ -104,7 +104,6 @@
   color: #dcdcdc;
 }
 
-
 .buttons {
   margin-top: 2rem;
   display: flex;
@@ -116,7 +115,6 @@
   background: black;
   color: white;
   border: none;
-  
   padding: 0.9rem 1.5rem;
   border-radius: 10px;
   cursor: pointer;
@@ -125,6 +123,79 @@
 
 
 
+@media (max-width: 1024px) {
+  .hero-content {
+
+    padding: 0 3rem;
+  }
+
+  .laptop-img {
+
+    width: 400px;
+  }
+
+  .hero-right h1 {
+    font-size: 2.5rem;
+  }
+}
 
 
+@media (max-width: 768px) {
+  .hero {
 
+    height: auto;
+    padding-bottom: 4rem;
+  }
+
+  .hero-content {
+
+    flex-direction: column;
+    text-align: center;
+    padding: 4rem 2rem;
+  }
+
+  .hero-left {
+    margin-bottom: 3rem;
+  }
+
+  .laptop-img {
+    width: 80vw;
+    max-width: 350px;
+    transform: rotate(0deg);
+  }
+
+  .hero-right {
+
+    max-width: 100%;
+  }
+
+  .buttons {
+
+    justify-content: center;
+  }
+
+  .background-dots {
+
+    display: none;
+  }
+}
+
+
+@media (max-width: 480px) {
+  .hero-content {
+    padding: 3rem 1rem;
+  }
+
+  .hero-right h1 {
+    font-size: 2rem;
+  }
+
+  .hero-right p {
+    font-size: 1rem;
+  }
+
+  .email-btn {
+    padding: 0.8rem 1.2rem;
+    width: 100%;
+  }
+}

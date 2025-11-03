@@ -4,8 +4,8 @@ import axios from "axios";
 import "./Auth.css";
 
 
-const SEND_OTP_URL = "https://backend-auth-ben6.onrender.com/api/auth/register/send-verify-otp";
-const VERIFY_OTP_URL = "https://backend-auth-ben6.onrender.com/api/auth/verify-account";
+const SEND_OTP_URL = "https://task-4-pt0q.onrender.com/api/auth/register/send-verify-otp";
+const VERIFY_OTP_URL = "https://task-4-pt0q.onrender.com/api/auth/verify-account";
 
 export default function SignupPage() {
   const navigate = useNavigate();
