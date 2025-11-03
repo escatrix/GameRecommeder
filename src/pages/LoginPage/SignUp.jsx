@@ -9,12 +9,12 @@ const VERIFY_OTP_URL = "https://backend-auth-ben6.onrender.com/api/auth/verify-a
 
 export default function SignupPage() {
   const navigate = useNavigate();
+  const [confirm , setConfirm] =useState("")
 
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    password: "",
-    confirmPassword: "",
+    password: ""
   });
 
   const [otpData, setOtpData] = useState({
@@ -45,10 +45,10 @@ export default function SignupPage() {
     setError("");
     setSuccess("");
 
-    if (formData.password !== formData.confirmPassword) {
-      setError("Passwords do not match!");
-      return;
-    }
+    // if (formData.password !== formData.confirmPassword) {
+    //   setError("Passwords do not match!");
+    //   return;
+    // }
 
     // axios.post returns a promise. chain .then() and .catch()
     axios
@@ -147,14 +147,14 @@ export default function SignupPage() {
                 onChange={handleChange}
                 required
               />
-              <input
+              {/* <input
                 type="password"
                 placeholder="Confirm Password"
                 name="confirmPassword"
                 value={formData.confirmPassword}
                 onChange={handleChange}
                 required
-              />
+              /> */}
 
               {error && <p className="error-msg">{error}</p>}
               {success && <p className="success-msg">{success}</p>}

@@ -78,7 +78,7 @@ export default function RecomByName() {
       {searchedGame && (
         <div className="searched-game-section">
           <h3>Results for:</h3>
-          <div className="game-card" style={{maxWidth: '350px', margin: '16px auto'}}>
+          <div className="game-card" >
             {searchedGame.background_image && (
               <img 
                 src={searchedGame.background_image} 
