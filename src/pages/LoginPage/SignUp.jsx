@@ -10,12 +10,16 @@ const VERIFY_OTP_URL = "https://backend-auth-ben6.onrender.com/api/auth/verify-a
 export default function SignupPage() {
   const navigate = useNavigate();
   const [confirm , setConfirm] =useState("")
+  const[name,setName]=useState("")
+  const[email,setEmail]=useState("")
+  const[password,setPassword]=useState("")
 
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    password: ""
-  });
+
+  // const [formData, setFormData] = useState({
+  //   name: "",
+  //   email: "",
+  //   password: ""
+  // });
 
   const [otpData, setOtpData] = useState({
     otp: "",
@@ -25,12 +29,12 @@ export default function SignupPage() {
   const [success, setSuccess] = useState("");
   const [showOtpSection, setShowOtpSection] = useState(false);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-    setError("");
-    setSuccess("");
-  };
+  // const handleChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setFormData((prev) => ({ ...prev, [name]: value }));
+  //   setError("");
+  //   setSuccess("");
+  // };
 
   const handleOtpChange = (e) => {
     const { name, value } = e.target;
@@ -39,39 +43,28 @@ export default function SignupPage() {
     setSuccess("");
   };
 
-  const handleSignup = (e) => {
+  const handleSignup = async(e) => {
     e.preventDefault();
 
     setError("");
     setSuccess("");
 
-    // if (formData.password !== formData.confirmPassword) {
-    //   setError("Passwords do not match!");
-    //   return;
-    // }
-
-    // axios.post returns a promise. chain .then() and .catch()
-    axios
-      .post(SEND_OTP_URL, {
-        name: formData.name,
-        email: formData.email,
-        password: formData.password,
+    try{
+      const response = await axios.post("https://backend-auth-ben6.onrender.com/api/auth/register/send-verify-otp",{
+        name:name,
+        email:email,
+        password:password
       },{withCredentials:true})
-      .then((response) => {
 
-        if (response.status === 200 || response.status === 201) {
-          setSuccess("Registration successful! Check your email for the OTP.");
-          setShowOtpSection(true);
-          setFormData((prev) => ({ ...prev, password: "", confirmPassword: "" }));
-        }
-      })
-      .catch((err) => {
-      
-        console.error("Signup error:", err);
-        setError(
-          err.response?.data?.message || "Failed to create account or send OTP. Try again!"
-        );
-      });
+      console.log(response)
+      setName("")
+      setEmail("")
+      setPassword("")
+    }catch(error){
+      console.log("Error in sending otp",error.message)
+    }
+
+   
   };
 
 
@@ -127,24 +120,24 @@ export default function SignupPage() {
                 type="text"
                 placeholder="Full Name"
                 name="name"
-                value={formData.name}
-                onChange={handleChange}
+                value={name}
+                onChange={(e)=>{setName(e.target.value)}}
                 required
               />
               <input
                 type="email"
                 placeholder="Email"
                 name="email"
-                value={formData.email}
-                onChange={handleChange}
+                value={email}
+                onChange={(e)=>{setEmail(e.target.value)}}
                 required
               />
               <input
                 type="password"
                 placeholder="Set Password"
                 name="password"
-                value={formData.password}
-                onChange={handleChange}
+                value={password}
+                onChange={(e)=>{setPassword(e.target.value)}}
                 required
               />
               {/* <input
