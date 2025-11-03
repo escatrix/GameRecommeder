@@ -14,7 +14,7 @@
     max-width: 900px;
     margin: 20px auto;
     padding: 20px;
-    background: #0D0A1F;
+    background: linear-gradient(rgb(184, 123, 201) , white);
     border: 1px solid #ddd;
     border-radius: 12px;
 
