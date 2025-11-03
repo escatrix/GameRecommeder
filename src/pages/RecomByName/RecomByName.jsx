@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./RecomByName.css";
-
+import Navbar from "../../components/Navbar/Navbar";
 import gameData from '../../game.json';
 
 
@@ -57,6 +57,7 @@ export default function RecomByName() {
 
   return (
     <div className="badawala">
+      <Navbar className='navbar'/>
     <div className="recom-container">
       <h2 className="recom-title">Recommend Games by Name</h2>
 

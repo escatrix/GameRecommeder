@@ -22,7 +22,7 @@ const Navbar = () => {
 
       <ul className={`menu ${menuOpen ? "open" : ""}`}>
        
-        <li><Link to="/mlmodel">Try Now</Link></li>
+        <li><Link to="/">Home</Link></li>
         <li><Link to="/login">Login</Link></li>
         <li className="signup"><Link to="/signup">Sign Up</Link></li>
         <li><Link to="/profile">Profile</Link></li>

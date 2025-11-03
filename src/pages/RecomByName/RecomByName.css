@@ -11,11 +11,11 @@
 
 .recom-container {
   width: 90%;
-  max-width: 900px;
+
   margin: 0 auto 50px auto;
   padding: 20px;
-  background: #ffffff;
-  border: 1px solid #ddd;
+  background: #0D0A1F;
+  border: 3px solid #0F172A;
   border-radius: 12px;
   text-align: center;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
@@ -90,7 +90,7 @@
 .searched-game-section {
   width: 100%;
   margin: 30px 0;
-  border-bottom: 2px solid #eee;
+  border-bottom: 2px solid #16213D;
   padding-bottom: 30px;
   display: flex;
   flex-direction: column;
@@ -123,7 +123,7 @@
 }
 
 .game-card {
-  background-color: #ffffff;
+  background-color: #16213D;
   border: 1px solid #ddd;
   border-radius: 8px;
   width: 280px;

@@ -14,8 +14,8 @@
     max-width: 900px;
     margin: 20px auto;
     padding: 20px;
-    background: linear-gradient( rgb(133, 97, 210) , white);
-    border: 1px solid #ddd;
+    background: #0D0A1F;
+    border: 1px solid #0F172A;
     border-radius: 12px;
 
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
@@ -110,7 +110,7 @@ hr {
 
 
 .game-box {
-    background: #ffffff;
+    background: #16213D;
     border: 1px solid #ddd;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
