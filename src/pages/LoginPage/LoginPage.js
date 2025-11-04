@@ -5,6 +5,7 @@ import axios from "axios";
 import "./Auth.css";
 
 
+
 const LOGIN_API_URL = "https://task-4-pt0q.onrender.com/api/auth/login";
 const RESET_OTP_URL = "https://task-4-pt0q.onrender.com/api/auth/reset-otp";
 const RESET_PASSWORD_URL = "https://task-4-pt0q.onrender.com/api/auth/resetPassword";
@@ -255,6 +256,7 @@ export default function LoginPage() {
 
   return (
     <div className="form">
+      
       <div className="auth-container">
         <div className="auth-card">
           <h2>{mode === 'login' ? 'Login' : 'Password Reset'}</h2>

@@ -14,7 +14,7 @@
 
 .nickname {
   background: linear-gradient(90deg, #1D1D1E, #4E4E51, #808084);
-  /* Adjusted height to be content-based instead of a fixed percentage */
+  
   padding: 30px 20px;
   width: 90%;
   max-width: 900px;
