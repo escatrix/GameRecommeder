@@ -38,12 +38,12 @@ function Hero(){
 
           {!isLoggedIn && (
             <div className="buttons">
-              <button
+              {/* <button
                 className="email-btn"
                 onClick={() => navigate("/signup")}
               >
                 Sign up with Email
-              </button>
+              </button> */}
             </div>
           )}
 

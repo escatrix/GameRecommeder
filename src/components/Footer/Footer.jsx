@@ -1,15 +1,19 @@
 import React from "react";
 import './Footer.css';
+import { useNavigate } from "react-router-dom";
 
 
 function Footer(){
+  
+    const navigate = useNavigate();
     return(
         <div className="footer">
             <div className="nickname">
                 <div className="claim">
                     <h1>Claim your Nickname!</h1>
                     <p>Join the world’s most authentic gaming community and enrich your life in games</p>
-                    <button className="btn">Sign Up With Email</button>
+                    <button className="btn" onClick={()=>{navigate("/signup")}}>Sign Up With Email</button>
+             
                 </div>
             </div>
             <div className="about">
