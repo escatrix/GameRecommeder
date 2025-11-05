@@ -10,7 +10,7 @@ import RecomByName from "./pages/RecomByName/RecomByName";
 import RecomByFeatures from "./pages/RecomByFeatures/RecomByFeatures";
 import ProfilePage from "./components/Profile/Profilepage";
 import Navbar from "./components/Navbar/Navbar";
-import React, { useState } from "react";
+import React, { useState ,useEffect} from "react";
 function App() {
     const [isLoggedIn , setIsLoggedIn] = useState(!!localStorage.getItem('user'))
     // console.log('App state isLoggedIn:', isLoggedIn);  // Matches localStorage check
