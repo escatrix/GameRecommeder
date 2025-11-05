@@ -3,8 +3,6 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./ProfilePage.css";
 
- 
-
 export default function ProfilePage() {
   const navigate = useNavigate();
   
@@ -17,12 +15,12 @@ export default function ProfilePage() {
   const [isFetchingData, setIsFetchingData] = useState(true);
 
   useEffect(() => {
-    const tokenExists = localStorage.getItem('user');
+    const userExists = localStorage.getItem('user');
     
-    if (!tokenExists) {
-        setIsFetchingData(false);
-        navigate("/login", { replace: true });
-        return;
+    if (!userExists) {
+      setIsFetchingData(false);
+      navigate("/login", { replace: true });
+      return;
     }
 
     const fetchUserData = async () => {
@@ -34,19 +32,25 @@ export default function ProfilePage() {
           withCredentials: true,
         });
 
-        if (response.data && response.data.success && response.data.data) {
-          setUser(response.data.data);
-          localStorage.setItem('user', JSON.stringify(response.data.data));
+        console.log('Full API Response:', response.data);  // Temp: Confirm structure
+
+        if (response.data && response.data.success && response.data.userData) {  // Fixed: userData, not data
+          const fetchedUser = response.data.userData;
+          setUser(fetchedUser);
+          localStorage.setItem('user', JSON.stringify(fetchedUser));  // Update with fresh data
         } else {
-        
-          setError(response.data.message || "Failed to retrieve user data.");
+          // Handle 200 but no userData (e.g., backend edge case)
+          setError(response.data.message || "No user data found. Please log in again.");
           localStorage.removeItem('user');
           setUser(null); 
         }
       } catch (err) {
-
-        console.error("User data fetch failed, session invalid:", err);
-        setError("Session expired. Please log in again to refresh your data.");
+        console.error("User data fetch failed:", err.response?.status, err.message);
+        if (err.response?.status === 401 || err.response?.status === 403) {
+          setError("Session expired. Please log in again.");
+        } else {
+          setError("Failed to fetch profile. Check connection and try again.");
+        }
         localStorage.removeItem('user');
         setUser(null); 
       } finally {
@@ -55,9 +59,7 @@ export default function ProfilePage() {
     };
     
     fetchUserData();
-
   }, [navigate]);
-
 
   if (isFetchingData) {
     return (
@@ -69,20 +71,26 @@ export default function ProfilePage() {
     );
   }
 
-  if (!user && error) {
+  if (!user) {  // Simplified: !user covers error + null cases
     return (
-        <div className="profile-container">
-            <div className="profile-card error-card">
-                <h2>Access Denied</h2>
-                <p className="error-msg">{error}</p>
-                <button 
-                  className="login-redirect-btn"
-                  onClick={() => navigate("/login")}
-                >
-                  Go to Login
-                </button>
-            </div>
+      <div className="profile-container">
+        <div className="profile-card error-card">
+          <h2>Access Denied</h2>
+          <p className="error-msg">{error || "Unable to load profile."}</p>
+          <button 
+            className="login-redirect-btn"
+            onClick={() => navigate("/login")}
+          >
+            Go to Login
+          </button>
+          <button  // New: Quick retry
+            className="retry-btn"
+            onClick={() => window.location.reload()}
+          >
+            Retry Fetch
+          </button>
         </div>
+      </div>
     );
   }
 
