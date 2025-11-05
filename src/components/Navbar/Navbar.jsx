@@ -33,10 +33,10 @@ const Navbar = ({isLoggedIn , setIsLoggedIn}) => {
         {/* <li><Link to="/login">Login</Link></li>
         <li className="signup"><Link to="/signup">Sign Up</Link></li> */}
         {isLoggedIn?(
-          <li className="logout">
-            <button onClick={handleLogout} className="nav-btn">
+          <li className="logout" onClick={handleLogout}>
+             
               Logout
-            </button>
+            
           </li>
         ):(
           <>

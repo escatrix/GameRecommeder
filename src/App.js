@@ -17,7 +17,7 @@ function App() {
   return (
      <BrowserRouter>
      <Navbar isLoggedIn ={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
-      <Routes>
+      {/* <Routes>
         <Route path="/" element={<Home />} />
         <Route path='/RecomByName' element={<RecomByName/>}/>
         <Route path='/RecomByFeatures' element={<RecomByFeatures/>}/>
@@ -25,8 +25,16 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/profile"  element={<ProfilePage/>}/>
-      </Routes>
-  
+      </Routes> */}
+      <Routes>
+  <Route path="/" element={<Home />} />
+  <Route path='/RecomByName' element={<RecomByName/>}/>
+  <Route path='/RecomByFeatures' element={<RecomByFeatures/>}/>
+  <Route path="/mlmodel" element={<MlModel />} />
+  <Route path="/login" element={<LoginPage setIsLoggedIn={setIsLoggedIn} />} />  {/* Add this! */}
+  <Route path="/signup" element={<SignUp setIsLoggedIn={setIsLoggedIn} />} />     {/* Add if SignUp needs it */}
+  <Route path="/profile" element={<ProfilePage/>}/>
+</Routes>
     </BrowserRouter>
   );
 }
