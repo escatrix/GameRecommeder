@@ -262,7 +262,8 @@ export default function ProfilePage() {
   const verifiedClass = isVerified ? "status-verified" : "status-unverified";
 
   return (
-    <div className="profile-container">
+      <div className="bada">
+<div className="profile-container">
       <div className="profile-card">
         {/* Placeholder for Profile Icon (Optional) */}
         {/* <div className="profile-pic-container">
@@ -311,6 +312,7 @@ export default function ProfilePage() {
           {isLoggingOut ? "Logging Out..." : "Logout"}
         </button>
       </div>
+    </div>
     </div>
   );
 }

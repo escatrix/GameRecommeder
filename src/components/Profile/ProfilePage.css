@@ -1,12 +1,6 @@
-/* ======================================================= */
-/* --- 2. PROFILE PAGE STYLES --- */
-/* ======================================================= */
 
-/* --- Base Container: Accounts for Fixed Navbar Height (60px) --- */
 .profile-container {
-    /* Pushes the content down below the fixed navbar */
     margin-top: 60px;
-    /* Occupies the rest of the vertical space */
     min-height: calc(100vh - 60px);
     display: flex;
     justify-content: center;
@@ -18,13 +12,11 @@
     box-sizing: border-box;
 }
 
-/* --- Profile Card --- */
 .profile-card {
     width: 100%;
-    max-width: 650px; /* Slightly increased max-width for better two-column display */
+    max-width: 650px; 
     background: #1a083a;
-    /* Top padding adjusted to accommodate the profile picture extending above the card (REMOVED: Assuming profile pic is not used for now) */
-    padding: 40px; /* Reduced for simpler card */
+    padding: 40px; 
     border-radius: 12px;
     box-shadow: 0 8px 40px rgba(0, 0, 0, 0.6);
     text-align: center;
@@ -32,9 +24,7 @@
     position: relative;
     margin: 20px;
 }
-/* Removed profile-pic-container and profile-pic styles as they are not in use in the JSX */
 
-/* --- Card Content Styles --- */
 .profile-card h2 {
     font-size: 2rem;
     margin-bottom: 30px;
@@ -42,13 +32,10 @@
     font-weight: 700;
 }
 
-/* --- The Main Fix: Grid Layout for Profile Details --- */
 .profile-details {
-    /* Set up a grid container */
     display: grid;
-    /* Two columns by default on desktop/tablet */
     grid-template-columns: repeat(2, 1fr);
-    gap: 20px; /* Spacing between grid items */
+    gap: 20px; 
     text-align: left;
     margin-bottom: 40px;
     padding: 20px;
