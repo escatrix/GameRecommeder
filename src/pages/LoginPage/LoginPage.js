@@ -47,7 +47,7 @@ export default function LoginPage({setIsLoggedIn}) {
         if (response.data.data) {
           localStorage.setItem('user', JSON.stringify(response.data.data));
         }
-        setIsLoggedIn(true)
+       setIsLoggedIn(true);
         navigate("/", { replace: true });
 
       } else {
