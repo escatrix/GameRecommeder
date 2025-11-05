@@ -1,301 +1,346 @@
+/* --- Base Container: Accounts for Navbar Height --- */
 .profile-container {
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #0f0424;
-  color: white;
-  font-family: 'Inter', sans-serif;
-  padding: 20px;
-  box-sizing: border-box;
+    /* ADJUST THIS: Replace '60px' with the actual height of your fixed navbar */
+    min-height: calc(100vh - 60px); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #0f0424; /* Deep, dark background */
+    color: white;
+    font-family: 'Inter', sans-serif;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
+/* --- Profile Card --- */
 .profile-card {
-  width: 100%;
-  max-width: 600px;
-  background: #1a083a;
-  padding: 40px;
-  border-radius: 12px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
-  text-align: center;
-  transition: all 0.3s ease;
-  position: relative;
+    width: 100%;
+    max-width: 600px; /* Base maximum width for the card */
+    background: #1a083a; /* Dark card background */
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.6); /* Enhanced shadow */
+    text-align: center;
+    transition: all 0.4s ease-in-out;
+    position: relative;
+    margin: 20px; /* Add margin to prevent sticking to edges on smaller screens */
 }
 
 .profile-card h2 {
-  font-size: 2rem;
-  margin-bottom: 30px;
-  color: #7b61ff;
-  font-weight: 600;
+    font-size: 2rem;
+    margin-bottom: 30px;
+    color: #7b61ff; /* Accent color */
+    font-weight: 700;
 }
 
+/* --- Details Section --- */
 .profile-details {
-  text-align: left;
-  margin-bottom: 40px;
-  border: 1px solid #3b1c77;
-  border-radius: 8px;
-  padding: 20px;
-  background: rgba(59, 28, 119, 0.1);
+    text-align: left;
+    margin-bottom: 40px;
+    border: 1px solid #3b1c77;
+    border-radius: 8px;
+    padding: 20px;
+    background: rgba(59, 28, 119, 0.1);
 }
 
 .detail-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 0;
-  border-bottom: 1px dashed #3b1c77;
-  font-size: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px dashed #3b1c77;
+    font-size: 1rem;
 }
 
 .detail-item:last-child {
-  border-bottom: none;
+    border-bottom: none;
 }
 
 .label {
-  font-weight: 500;
-  color: #b0a5cc;
-  min-width: 100px;
+    font-weight: 500;
+    color: #b0a5cc; /* Muted text */
+    min-width: 120px; /* Increased minimum width for label */
+    padding-right: 15px; /* Add some space */
 }
 
 .value {
-  font-weight: 600;
-  text-align: right;
-  flex: 1;
+    font-weight: 600;
+    text-align: right;
+    flex: 1;
+    word-break: break-word; /* Prevents long emails from overflowing */
 }
 
 .status-verified {
-  color: #00ff9f;
-  font-weight: bold;
+    color: #00ff9f;
+    font-weight: bold;
 }
 
 .status-unverified {
-  color: #ff6b6b;
-  font-weight: bold;
+    color: #ff6b6b;
+    font-weight: bold;
 }
 
+/* --- Buttons & Messaging --- */
 .logout-btn {
-  width: 100%;
-  padding: 12px;
-  background: #ff6b6b;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background 0.3s ease;
-  margin-top: 20px;
+    width: 100%;
+    padding: 14px; /* Increased padding */
+    background: #ff6b6b;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.05rem;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
+    margin-top: 25px;
 }
 
 .logout-btn:hover:not([disabled]) {
-  background: #ff8c8c;
-  transform: translateY(-1px);
+    background: #ff8c8c;
+    transform: translateY(-2px); /* Slightly more pronounced hover */
+    box-shadow: 0 4px 10px rgba(255, 107, 107, 0.3);
 }
 
 .logout-btn:disabled {
-  background: #4e4066;
-  cursor: not-allowed;
+    background: #4e4066;
+    cursor: not-allowed;
 }
 
 .error-msg {
-  color: #ff6b6b;
-  margin: 15px 0;
-  font-size: 0.9rem;
-  padding: 10px;
-  background: rgba(255, 107, 107, 0.1);
-  border-radius: 6px;
-  border-left: 3px solid #ff6b6b;
+    color: #ff6b6b;
+    margin: 15px 0;
+    font-size: 0.95rem;
+    padding: 12px;
+    background: rgba(255, 107, 107, 0.1);
+    border-radius: 6px;
+    border-left: 4px solid #ff6b6b;
+    text-align: left;
 }
 
+/* --- Loading State --- */
 .profile-card.loading {
-  background: #2a155a;
-  box-shadow: none;
-  border: 1px solid #3b1c77;
-  text-align: center;
-  color: #b0a5cc;
+    background: #2a155a;
+    box-shadow: none;
+    border: 1px solid #3b1c77;
+    text-align: center;
+    color: #b0a5cc;
 }
 
 .profile-card.loading p {
-  font-style: italic;
-  animation: pulse 1.5s ease-in-out infinite alternate;
+    font-style: italic;
+    animation: pulse 1.5s ease-in-out infinite alternate;
 }
 
 @keyframes pulse {
-  from { opacity: 0.5; }
-  to { opacity: 1; }
+    from { opacity: 0.4; } /* Adjusted opacity for better effect */
+    to { opacity: 1; }
 }
 
+/* --- Error State Card --- */
 .profile-card.error-card {
-  max-width: 500px;
-  padding: 50px 40px;
+    max-width: 500px;
+    padding: 50px 40px;
 }
 
 .login-redirect-btn,
 .retry-btn {
-  width: 100%;
-  padding: 12px;
-  margin: 10px 0;
-  border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
+    width: 100%;
+    padding: 14px;
+    margin: 15px 0 5px; /* Better margin management */
+    border: none;
+    border-radius: 8px;
+    font-size: 1.05rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 .login-redirect-btn {
-  background: #7b61ff;
-  color: white;
+    background: #7b61ff;
+    color: white;
 }
 
 .login-redirect-btn:hover {
-  background: #5a4ad9;
-  transform: translateY(-1px);
+    background: #5a4ad9;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(123, 97, 255, 0.3);
 }
 
 .retry-btn {
-  background: #4e4066;
-  color: white;
+    background: #4e4066;
+    color: white;
 }
 
 .retry-btn:hover {
-  background: #3b1c77;
-  transform: translateY(-1px);
+    background: #3b1c77;
+    transform: translateY(-2px);
 }
 
+/* --- Media Queries: FULLY RESPONSIVE --- */
+
+/* Mobile (<= 767px) */
 @media (max-width: 767px) {
-  .profile-container {
-    padding: 10px;
-  }
+    .profile-container {
+        padding: 10px;
+        align-items: flex-start; /* Start at the top, not center (better for small screens) */
+    }
 
-  .profile-card {
-    max-width: 100%;
-    padding: 30px 20px;
-    margin: 0 10px;
-  }
+    .profile-card {
+        max-width: 100%;
+        padding: 30px 20px;
+        margin: 20px 0; /* Consistent margin */
+    }
 
-  .profile-card h2 {
-    font-size: 1.5rem;
-    margin-bottom: 20px;
-  }
+    .profile-card h2 {
+        font-size: 1.6rem;
+        margin-bottom: 25px;
+    }
 
-  .profile-details {
-    padding: 15px;
-    margin-bottom: 30px;
-  }
+    .profile-details {
+        padding: 15px;
+        margin-bottom: 30px;
+    }
 
-  .detail-item {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 5px;
-    padding: 12px 0;
-    font-size: 0.95rem;
-  }
+    /* Key Mobile Change: Stack label and value for readability */
+    .detail-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+        padding: 15px 0;
+        font-size: 1rem;
+    }
 
-  .label {
-    min-width: auto;
-    font-size: 0.9rem;
-  }
+    .label {
+        min-width: auto;
+        font-size: 0.9rem;
+        color: #7b61ff; /* Give label a slight accent */
+        padding-right: 0;
+    }
 
-  .value {
-    text-align: left;
-    font-size: 1rem;
-  }
+    .value {
+        text-align: left;
+        font-size: 1.05rem;
+    }
 
-  .logout-btn,
-  .login-redirect-btn,
-  .retry-btn {
-    font-size: 0.95rem;
-    padding: 14px;
-  }
+    .logout-btn,
+    .login-redirect-btn,
+    .retry-btn {
+        font-size: 1rem;
+        padding: 14px;
+    }
 }
 
+/* Tablet (768px to 1024px) */
 @media (min-width: 768px) and (max-width: 1024px) {
-  .profile-card {
-    max-width: 500px;
-    padding: 35px 30px;
-  }
+    .profile-card {
+        max-width: 550px; /* Slightly larger on tablet */
+        padding: 35px;
+    }
 
-  .profile-card h2 {
-    font-size: 1.8rem;
-  }
+    .profile-card h2 {
+        font-size: 1.9rem;
+    }
 
-  .detail-item {
-    font-size: 0.98rem;
-    padding: 13px 0;
-  }
+    .detail-item {
+        font-size: 1rem;
+        padding: 14px 0;
+    }
 }
 
+/* Desktop (1025px and up) */
 @media (min-width: 1025px) {
-  .profile-container {
-    padding: 40px;
-  }
+    .profile-card {
+        max-width: 700px;
+        padding: 50px;
+    }
 
-  .profile-card {
-    max-width: 700px;
-    padding: 50px;
-  }
+    .profile-card h2 {
+        font-size: 2.2rem;
+        margin-bottom: 35px;
+    }
 
-  .profile-card h2 {
-    font-size: 2.2rem;
-    margin-bottom: 35px;
-  }
+    .profile-details {
+        padding: 25px;
+    }
 
-  .profile-details {
-    padding: 25px;
-  }
+    .detail-item {
+        font-size: 1.1rem;
+        padding: 18px 0;
+    }
 
-  .detail-item {
-    font-size: 1.1rem;
-    padding: 18px 0;
-  }
-
-  .label {
-    font-size: 1.05rem;
-  }
-
-  .value {
-    font-size: 1.15rem;
-  }
-
-  .logout-btn,
-  .login-redirect-btn,
-  .retry-btn {
-    padding: 15px;
-    font-size: 1.05rem;
-    max-width: 200px;
-    margin: 0 auto 10px;
-  }
+    .logout-btn,
+    .login-redirect-btn,
+    .retry-btn {
+        padding: 15px;
+        font-size: 1.05rem;
+        max-width: 300px; /* Wider button on desktop */
+        margin: 25px auto 10px;
+    }
 }
 
+/* Large Desktop (1440px and up) - Grid Layout */
 @media (min-width: 1440px) {
-  .profile-card {
-    max-width: 800px;
-  }
+    .profile-card {
+        max-width: 800px;
+    }
 
-  .profile-details {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 15px;
-    text-align: center;
-  }
+    /* Grid layout for profile details */
+    .profile-details {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* Two equal columns */
+        gap: 20px;
+        text-align: left; /* Reset text-align */
+        padding: 30px; /* More padding */
+    }
 
-  .detail-item {
-    flex-direction: row;
-    justify-content: space-between;
-    border-bottom: none;
-    padding: 15px;
-    background: rgba(59, 28, 119, 0.05);
-    border-radius: 6px;
-  }
+    .detail-item {
+        flex-direction: row;
+        justify-content: space-between;
+        border-bottom: none; /* No dash line */
+        padding: 15px;
+        background: rgba(59, 28, 119, 0.15); /* Slightly darker background per item */
+        border-radius: 8px;
+        border: 1px solid #3b1c77;
+    }
 }
 
+/* Print Styles */
 @media print {
-  .profile-container {
-    background: white;
-    color: black;
-  }
+    .profile-container {
+        background: white;
+        color: black;
+        padding: 0;
+        min-height: auto;
+    }
 
-  .profile-card {
-    box-shadow: none;
-    border: 1px solid #ccc;
-  }
+    .profile-card {
+        box-shadow: none;
+        border: 1px solid #ccc;
+        max-width: 100%;
+        margin: 0;
+        padding: 20px;
+        background: white;
+    }
+    
+    .profile-card h2 {
+        color: #333;
+    }
+
+    .detail-item {
+        border-bottom: 1px solid #ddd;
+    }
+    
+    .label, .value {
+        color: black;
+    }
+    
+    .status-verified {
+        color: green;
+    }
+    
+    .status-unverified {
+        color: red;
+    }
+    
+    .logout-btn, .login-redirect-btn, .retry-btn, .error-msg {
+        display: none; /* Hide interactive elements when printing */
+    }
 }
