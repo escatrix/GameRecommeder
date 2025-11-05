@@ -13,6 +13,7 @@ import Navbar from "./components/Navbar/Navbar";
 import React, { useState } from "react";
 function App() {
     const [isLoggedIn , setIsLoggedIn] = useState(!!localStorage.getItem('user'))
+    console.log('App state isLoggedIn:', isLoggedIn);  // Matches localStorage check
    
   return (
      <BrowserRouter>
