@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState , memo } from "react";
 import "./Navbar.css";
 import { FaSearch, FaBars, FaTimes } from "react-icons/fa";
 import { Link, useNavigate} from "react-router-dom";
@@ -8,7 +8,7 @@ import axios from "axios";
 
 
 
-const Navbar = ({isLoggedIn , setIsLoggedIn}) => {
+const Navbar = ({isLoggedIn=false , setIsLoggedIn}) => {
   const [menuOpen, setMenuOpen] = useState(false);
   console.log('Navbar received isLoggedIn:', isLoggedIn);  // Should be true after login
 const navigate = useNavigate();
@@ -29,7 +29,7 @@ const navigate = useNavigate();
 };
 
   return (
-    <nav className="navbar">
+    <nav className="navbar" key={isLoggedIn ? 'logged-in' : 'logged-out'}>
       <div className="nav-left">
         <h1 className="logo">
           Game<span>Recommender</span>
@@ -65,4 +65,4 @@ const navigate = useNavigate();
   );
 };
 
-export default Navbar;
+export default memo(Navbar);

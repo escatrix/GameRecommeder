@@ -14,7 +14,15 @@ import React, { useState } from "react";
 function App() {
     const [isLoggedIn , setIsLoggedIn] = useState(!!localStorage.getItem('user'))
     console.log('App state isLoggedIn:', isLoggedIn);  // Matches localStorage check
-   
+   useEffect(() => {
+    const syncAuth = () => setIsLoggedIn(!!localStorage.getItem('user'));
+    window.addEventListener('storage', syncAuth);  // Cross-tab sync
+    const interval = setInterval(syncAuth, 500);  // Poll every 0.5s for same-tab
+    return () => {
+      window.removeEventListener('storage', syncAuth);
+      clearInterval(interval);
+    };
+  }, []);
   return (
      <BrowserRouter>
      <Navbar isLoggedIn ={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
