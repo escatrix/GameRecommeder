@@ -10,9 +10,8 @@ const LOGIN_API_URL = "https://task-4-pt0q.onrender.com/api/auth/login";
 const RESET_OTP_URL = "https://task-4-pt0q.onrender.com/api/auth/reset-otp";
 const RESET_PASSWORD_URL = "https://task-4-pt0q.onrender.com/api/auth/resetPassword";
 
-export default function LoginPage() {
+export default function LoginPage({setIsLoggedIn}) {
   const navigate = useNavigate();
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [otp, setOtp] = useState("");
@@ -48,7 +47,7 @@ export default function LoginPage() {
         if (response.data.data) {
           localStorage.setItem('user', JSON.stringify(response.data.data));
         }
-        
+        setIsLoggedIn(true)
         navigate("/", { replace: true });
 
       } else {

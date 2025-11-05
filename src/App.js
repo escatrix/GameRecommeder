@@ -9,10 +9,14 @@ import SignUp from "./pages/LoginPage/SignUp";
 import RecomByName from "./pages/RecomByName/RecomByName";
 import RecomByFeatures from "./pages/RecomByFeatures/RecomByFeatures";
 import ProfilePage from "./components/Profile/Profilepage";
-
+import Navbar from "./components/Navbar/Navbar";
+import React, { useState } from "react";
 function App() {
+    const [isLoggedIn , setIsLoggedIn] = useState(!!localStorage.getItem('user'))
+   
   return (
      <BrowserRouter>
+     <Navbar isLoggedIn ={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path='/RecomByName' element={<RecomByName/>}/>

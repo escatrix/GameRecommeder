@@ -3,13 +3,11 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./ProfilePage.css";
 
-// API Endpoint for User Data
-const USER_DATA_API_URL = "https://task-4-pt0q.onrender.com/api/user/data"; 
+ 
 
 export default function ProfilePage() {
   const navigate = useNavigate();
   
-  // Initialize user state from local storage
   const [user, setUser] = useState(() => {
     const localUser = localStorage.getItem('user');
     return localUser ? JSON.parse(localUser) : null;
@@ -21,7 +19,6 @@ export default function ProfilePage() {
   useEffect(() => {
     const tokenExists = localStorage.getItem('user');
     
-    // 1. Initial check: If no local data exists, redirect to login (basic protection)
     if (!tokenExists) {
         setIsFetchingData(false);
         navigate("/login", { replace: true });
@@ -33,32 +30,30 @@ export default function ProfilePage() {
       setError("");
 
       try {
-        const response = await axios.get(USER_DATA_API_URL, {
+        const response = await axios.get("https://task-4-pt0q.onrender.com/api/user/data", {
           withCredentials: true,
         });
 
         if (response.data && response.data.success && response.data.data) {
-          // Success: Set fresh data and update local storage
           setUser(response.data.data);
           localStorage.setItem('user', JSON.stringify(response.data.data));
         } else {
-          // Failure: Backend sent success: false 
+        
           setError(response.data.message || "Failed to retrieve user data.");
           localStorage.removeItem('user');
           setUser(null); 
         }
       } catch (err) {
-        // Critical Failure: Axios catches 401/403 (JWT invalid/expired/missing)
+
         console.error("User data fetch failed, session invalid:", err);
         setError("Session expired. Please log in again to refresh your data.");
         localStorage.removeItem('user');
-        setUser(null); // Stop displaying protected data
+        setUser(null); 
       } finally {
         setIsFetchingData(false);
       }
     };
     
-    // If local data exists, proceed to fetch fresh data.
     fetchUserData();
 
   }, [navigate]);
@@ -74,7 +69,6 @@ export default function ProfilePage() {
     );
   }
 
-  // If fetching is done but no user data is present (due to API failure/cleanup)
   if (!user && error) {
     return (
         <div className="profile-container">
@@ -92,7 +86,6 @@ export default function ProfilePage() {
     );
   }
 
-  // Determine verification status display
   const isVerified = user.isAccountVerified === true;
   const verifiedStatus = isVerified ? "Verified" : "Unverified";
   const verifiedClass = isVerified ? "status-verified" : "status-unverified";
