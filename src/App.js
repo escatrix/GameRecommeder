@@ -13,16 +13,32 @@ import Navbar from "./components/Navbar/Navbar";
 import React, { useState ,useEffect} from "react";
 function App() {
     const [isLoggedIn , setIsLoggedIn] = useState(!!localStorage.getItem('user'))
-    // console.log('App state isLoggedIn:', isLoggedIn);  // Matches localStorage check
-   useEffect(() => {
-    const syncAuth = () => setIsLoggedIn(!!localStorage.getItem('user'));
-    window.addEventListener('storage', syncAuth);  // Cross-tab sync
-    const interval = setInterval(syncAuth, 500);  // Poll every 0.5s for same-tab
-    return () => {
-      window.removeEventListener('storage', syncAuth);
-      clearInterval(interval);
-    };
-  }, []);
+    console.log('App state isLoggedIn:', isLoggedIn);  // Matches localStorage check
+    useEffect(() => {
+  const syncAuth = () => {
+    const newLoggedIn = !!localStorage.getItem('user');
+    if (newLoggedIn !== isLoggedIn) {
+      console.log('useEffect sync: Setting to', newLoggedIn);  // New log
+      setIsLoggedIn(newLoggedIn);
+    }
+  };
+  syncAuth();  // Run once on mount
+  window.addEventListener('storage', syncAuth);
+  const interval = setInterval(syncAuth, 100);  // Faster poll
+  return () => {
+    window.removeEventListener('storage', syncAuth);
+    clearInterval(interval);
+  };
+}, [isLoggedIn]);  // Depend on isLoggedIn for reactivity
+  //  useEffect(() => {
+  //   const syncAuth = () => setIsLoggedIn(!!localStorage.getItem('user'));
+  //   window.addEventListener('storage', syncAuth);  // Cross-tab sync
+  //   const interval = setInterval(syncAuth, 500);  // Poll every 0.5s for same-tab
+  //   return () => {
+  //     window.removeEventListener('storage', syncAuth);
+  //     clearInterval(interval);
+  //   };
+  // }, []);
   return (
      <BrowserRouter>
      <Navbar isLoggedIn ={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>

@@ -43,12 +43,20 @@ export default function LoginPage({setIsLoggedIn}) {
       );
 
       if (response.data && response.data.success === true) {
+        console.log('LoginPage: Calling setIsLoggedIn(true)', typeof setIsLoggedIn);  // Should log "function"
+if (response.data.data) {
+  localStorage.setItem('user', JSON.stringify(response.data.data));
+  console.log('LoginPage: localStorage set with user:', response.data.data.email);  // Confirm save
+}
+setIsLoggedIn(true);
+// Add delay for state update (temp hack)
+setTimeout(() => navigate("/", { replace: true }), 100);
         
-        if (response.data.data) {
-          localStorage.setItem('user', JSON.stringify(response.data.data));
-        }
-       setIsLoggedIn(true);
-        navigate("/", { replace: true });
+      //   if (response.data.data) {
+      //     localStorage.setItem('user', JSON.stringify(response.data.data));
+      //   }
+      //  setIsLoggedIn(true);
+      //   navigate("/", { replace: true });
 
       } else {
         setError(response.data.message || "Login failed. Please check your credentials.");
