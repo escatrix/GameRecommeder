@@ -132,7 +132,11 @@ export default function SignupPage() {
       setTimeout(() => {
         navigate("/login");
       }, 1500);
-    } else {
+    }else if(response.status === 409){
+
+      setError("user already exist")
+    } 
+    else {
       setError("OTP verification returned an unexpected status.");
     }
 
