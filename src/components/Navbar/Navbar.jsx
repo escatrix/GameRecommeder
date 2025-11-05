@@ -1,17 +1,31 @@
 import React, { useState } from "react";
 import "./Navbar.css";
 import { FaSearch, FaBars, FaTimes } from "react-icons/fa";
-import { Link, Navigate } from "react-router-dom";
+import { Link, useNavigate} from "react-router-dom";
 import { IoRadioButtonOnSharp } from "react-icons/io5";
 import { PiFunctionDuotone } from "react-icons/pi";
+import axios from "axios";
+
+
 
 const Navbar = ({isLoggedIn , setIsLoggedIn}) => {
   const [menuOpen, setMenuOpen] = useState(false);
-  function handleLogout(){
-    localStorage.removeItem('user')
-    setIsLoggedIn(false)
-    Navigate('/')
+const navigate = useNavigate();
+  const LOGOUT_API_URL = "https://task-4-pt0q.onrender.com/api/auth/logout";
+  const handleLogout = async () => {
+  try {
+    const response = await axios.post(LOGOUT_API_URL, {}, { withCredentials: true });
+    if (response.data.success) {
+      console.log(response.data.message); 
+    }
+  } catch (error) {
+    console.error("Logout API error:", error.response?.data?.message || error.message);
+  } finally {
+    localStorage.removeItem('user');
+    setIsLoggedIn(false);
+    navigate('/', { replace: true });
   }
+};
 
   return (
     <nav className="navbar">
