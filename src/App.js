@@ -13,18 +13,18 @@ import Navbar from "./components/Navbar/Navbar";
 import React, { useState ,useEffect} from "react";
 function App() {
     const [isLoggedIn , setIsLoggedIn] = useState(!!localStorage.getItem('user'))
-    console.log('App state isLoggedIn:', isLoggedIn);  // Matches localStorage check
+    console.log('App state isLoggedIn:', isLoggedIn); 
     useEffect(() => {
   const syncAuth = () => {
     const newLoggedIn = !!localStorage.getItem('user');
     if (newLoggedIn !== isLoggedIn) {
-      console.log('useEffect sync: Setting to', newLoggedIn);  // New log
+      console.log('useEffect sync: Setting to', newLoggedIn);  
       setIsLoggedIn(newLoggedIn);
     }
   };
-  syncAuth();  // Run once on mount
+  syncAuth();
   window.addEventListener('storage', syncAuth);
-  const interval = setInterval(syncAuth, 100);  // Faster poll
+  const interval = setInterval(syncAuth, 100);  
   return () => {
     window.removeEventListener('storage', syncAuth);
     clearInterval(interval);

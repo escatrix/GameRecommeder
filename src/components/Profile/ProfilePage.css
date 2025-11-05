@@ -1,13 +1,14 @@
 
 .profile-container {
-    margin-top: 60px;
-    min-height: calc(100vh - 60px);
-    display: flex;
-    justify-content: center;
+   
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
     align-items: center;
     background-color: #0f0424;
     color: white;
-    font-family: 'Inter', sans-serif;
+   
     padding: 20px;
     box-sizing: border-box;
 }
@@ -17,6 +18,8 @@
     max-width: 650px; 
     background: #1a083a;
     padding: 40px; 
+    display: flex;
+    flex-direction: column;
     border-radius: 12px;
     box-shadow: 0 8px 40px rgba(0, 0, 0, 0.6);
     text-align: center;
@@ -33,8 +36,8 @@
 }
 
 .profile-details {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    display: flex;
+    flex-direction: column;
     gap: 20px; 
     text-align: left;
     margin-bottom: 40px;
@@ -45,12 +48,11 @@
 }
 
 .detail-group {
-    /* A container for a single Name/Email/Status item */
     display: flex;
     flex-direction: column;
     padding: 15px;
     border-radius: 8px;
-    background: rgba(59, 28, 119, 0.2); /* Slightly darker background for each item */
+    background: rgba(59, 28, 119, 0.2); 
     border: 1px solid #3b1c77;
 }
 
@@ -77,11 +79,8 @@
     color: #ff6b6b;
     font-weight: bold;
 }
-/* --- End Main Fix --- */
 
-/* --- Mobile Adjustments (<= 767px) --- */
 @media (max-width: 767px) {
-    /* Collapse the grid to a single column on mobile */
     .profile-details {
         grid-template-columns: 1fr;
         padding: 15px;

@@ -10,7 +10,7 @@ import axios from "axios";
 
 const Navbar = ({isLoggedIn=false , setIsLoggedIn}) => {
   const [menuOpen, setMenuOpen] = useState(false);
-  console.log('Navbar received isLoggedIn:', isLoggedIn);  // Should be true after login
+  console.log('Navbar received isLoggedIn:', isLoggedIn);  // true after login
 const navigate = useNavigate();
   const LOGOUT_API_URL = "https://task-4-pt0q.onrender.com/api/auth/logout";
   const handleLogout = async () => {
