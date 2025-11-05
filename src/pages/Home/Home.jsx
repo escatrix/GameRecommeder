@@ -12,7 +12,7 @@ function Home(){
     return(
         <div className="home">
     
-        <Navbar className='navbar'/>
+       
        
         <Hero className='hero'/>
          <MlModel/>
