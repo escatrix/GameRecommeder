@@ -13,7 +13,7 @@ import Navbar from "./components/Navbar/Navbar";
 import React, { useState } from "react";
 function App() {
     const [isLoggedIn , setIsLoggedIn] = useState(!!localStorage.getItem('user'))
-    console.log('App state isLoggedIn:', isLoggedIn);  // Matches localStorage check
+    // console.log('App state isLoggedIn:', isLoggedIn);  // Matches localStorage check
    useEffect(() => {
     const syncAuth = () => setIsLoggedIn(!!localStorage.getItem('user'));
     window.addEventListener('storage', syncAuth);  // Cross-tab sync
